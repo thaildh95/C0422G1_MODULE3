@@ -209,14 +209,14 @@ INSERT INTO furama_management.hop_dong_chi_tiet (ma_hop_dong_chi_tiet, ma_hop_do
 ('7', '1', '2', '2'),
 ('8', '12', '2', '2');	
  
- --- cau 2 -----------------
+ -- cau 2 -----------------
  select * from nhan_vien where(ho_ten regexp "^[kht]") and (char_length(ho_ten)<+15);
  
- ---- cau 3 ------------
+ -- cau 3 ------------
  select * from khach_hang where(dia_chi like "%Đà Nẵng" or "%Quảng Trị") 
  and ((timestampdiff(year,ngay_sinh,curdate())>=18) 
  and (timestampdiff(year,ngay_sinh,curdate())<=50));
- 
+ -- câu 4
  select k.ho_ten, l.ten_loai_khach,count(h.ma_khach_hang) as so_luong
  from khach_hang k
  join loai_khach l on k.ma_loai_khach = l.ma_loai_khach
@@ -225,15 +225,81 @@ join hop_dong h on k.ma_khach_hang = h.ma_khach_hang
  group by h.ma_khach_hang
  order by so_luong;
  
- select k.ma_khach_hang,k.ho_ten,l.ten_loai_khach,h.ma_hop_dong,d.ten_dich_vu,h.ngay_lam_hop_dong,count(h.ma_khach_hang) as so_luong,sum((so_luong*dv.gia)+d.chi_phi_thue) as total
+ -- câu 5
+ select
+ k.ma_khach_hang,
+ k.ho_ten,
+ l.ten_loai_khach,
+ h.ma_hop_dong,
+ d.ten_dich_vu,
+ h.ngay_lam_hop_dong,
+(d.chi_phi_thue + IFNULL(ct.so_luong * dv.gia, 0)) AS tong_tien
+ 
  from khach_hang k
- join loai_khach l on k.ma_loai_khach = l.ma_loai_khach
- join hop_dong h on k.ma_khach_hang = h.ma_khach_hang
- join dich_vu d on h.ma_dich_vu =d.ma_dich_vu
- join hop_dong_chi_tiet ct on h.ma_hop_dong = ct.ma_hop_dong
- join dich_vu_di_kem dv on ct.ma_dich_vu_di_kem = dv.ma_dich_vu_di_kem
- group by k.ma_khach_hang
- order by h.ma_hop_dong
+ left join loai_khach l on k.ma_loai_khach = l.ma_loai_khach
+ left join hop_dong h on k.ma_khach_hang = h.ma_khach_hang
+ left join dich_vu d on h.ma_dich_vu =d.ma_dich_vu
+ left join hop_dong_chi_tiet ct on h.ma_hop_dong = ct.ma_hop_dong
+ left join dich_vu_di_kem dv on ct.ma_dich_vu_di_kem = dv.ma_dich_vu_di_kem
+ group by h.ma_hop_dong,k.ma_khach_hang
+ order by h.ma_khach_hang,k.ho_ten;
+ 
+ -- câu 6
+ select 
+ dv.ma_dich_vu,
+ dv.ten_dich_vu,
+ dv.dien_tich,
+ dv.chi_phi_thue,
+ ldv.ten_loai_dich_vu
+ 
+ from dich_vu dv
+ left join loai_dich_vu ldv on dv.ma_loai_dich_vu = ldv.ma_loai_dich_vu
+ left join hop_dong hd on dv.ma_dich_vu = hd.ma_dich_vu
+ where hd.ma_dich_vu not in(
+ select hd.ma_dich_vu
+ from hop_dong
+ where 
+ ((hd.ngay_lam_hop_dong between "2021-01-01" and "2021-03-31")
+ or
+ (hd.ngay_ket_thuc between "2021-01-01" and "2021-03-31"))
+ )
+ group by hd.ma_dich_vu;
+ 
+-- câu 7
+SELECT 
+    dv.ma_dich_vu,
+    dv.ten_dich_vu,
+    dv.dien_tich,
+    dv.so_nguoi_toi_da,
+    dv.chi_phi_thue,
+    ldv.ten_loai_dich_vu
+FROM
+    dich_vu dv
+        JOIN
+    hop_dong hd ON dv.ma_dich_vu = hd.ma_dich_vu
+        JOIN
+    loai_dich_vu ldv ON dv.ma_loai_dich_vu = ldv.ma_loai_dich_vu
+WHERE
+    dv.ma_dich_vu IN (SELECT 
+            hd.ma_dich_vu
+        FROM
+            hop_dong hd
+        WHERE
+            YEAR(hd.ngay_lam_hop_dong) = '2020'
+                OR YEAR(hd.ngay_ket_thuc) = '2020')
+        AND dv.ma_dich_vu NOT IN (SELECT 
+            hd.ma_dich_vu
+        FROM
+            hop_dong hd
+        WHERE
+            YEAR(hd.ngay_lam_hop_dong) = '2021'
+                OR YEAR(hd.ngay_ket_thuc) = '2021')
+GROUP BY dv.ma_dich_vu;
 
+
+
+ 
+ 
+ 
 
  
