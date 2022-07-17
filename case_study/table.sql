@@ -210,7 +210,30 @@ INSERT INTO furama_management.hop_dong_chi_tiet (ma_hop_dong_chi_tiet, ma_hop_do
 ('8', '12', '2', '2');	
  
  --- cau 2 -----------------
- select * from nhan_vien where(ho_ten regexp "^[kht]") and (char_lengt(ho_ten)<+15);
+ select * from nhan_vien where(ho_ten regexp "^[kht]") and (char_length(ho_ten)<+15);
  
  ---- cau 3 ------------
- select * from khach_hang where(dia_chi like "%Đà Nẵng" or "%Quảng Trị") and ((timestampdiff(year,ngay_sinh,curdate())>=18) and (timestampdiff(year,ngay_sinh,curdate())<=50));
+ select * from khach_hang where(dia_chi like "%Đà Nẵng" or "%Quảng Trị") 
+ and ((timestampdiff(year,ngay_sinh,curdate())>=18) 
+ and (timestampdiff(year,ngay_sinh,curdate())<=50));
+ 
+ select k.ho_ten, l.ten_loai_khach,count(h.ma_khach_hang) as so_luong
+ from khach_hang k
+ join loai_khach l on k.ma_loai_khach = l.ma_loai_khach
+join hop_dong h on k.ma_khach_hang = h.ma_khach_hang
+ where l.ten_loai_khach = "diamond"
+ group by h.ma_khach_hang
+ order by so_luong;
+ 
+ select k.ma_khach_hang,k.ho_ten,l.ten_loai_khach,h.ma_hop_dong,d.ten_dich_vu,h.ngay_lam_hop_dong,h.ngay_ket_thuc
+ from khach_hang k
+ join loai_khach l on k.ma_loai_khach = l.ma_loai_khach
+ join hop_dong h on k.ma_khach_hang = h.ma_khach_hang
+ join dich_vu d on h.ma_dich_vu =d.ma_dich_vu
+ join hop_dong_chi_tiet ct on h.ma_hop_dong = ct.ma_hop_dong
+ join dich_vu_di_kem dv on ct.ma_dich_vu_di_kem = dv.ma_dich_vu_di_kem
+ group by h.ma_hop_dong
+ order by k.ma_khach_hang
+
+
+ 
