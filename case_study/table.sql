@@ -391,9 +391,9 @@ hd.tien_dat_coc
 
 -- 13.	Hiển thị thông tin các Dịch vụ đi kèm được sử dụng nhiều nhất bởi các Khách hàng đã đặt phòng.
 -- (Lưu ý là có thể có nhiều dịch vụ có số lần sử dụng nhiều như nhau).
-    select dvdk.*,hdct.so_luong
+    select dvdk.*,
+    hdct.so_luong
     
-  
 FROM
     hop_dong hd
         LEFT JOIN
@@ -404,11 +404,57 @@ FROM
     khach_hang kh ON hd.ma_khach_hang = kh.ma_khach_hang
         LEFT JOIN
     loai_khach lk ON kh.ma_loai_khach = lk.ma_loai_khach
+    where hdct.so_luong = (
+    select max(so_luong)
+    from hop_dong_chi_tiet)
+    group by dvdk.ten_dich_vu_di_kem
+    order by dvdk.ma_dich_vu_di_kem;
     
-    where 
-    
-    
+    -- câu 14
+	select 
+    hd.ma_hop_dong,
+    dv.ten_dich_vu,
+    dvdk.ten_dich_vu_di_kem,
+    count(dvdk.ma_dich_vu_di_kem)  as so_lan
  
+FROM
+    hop_dong hd
+        LEFT JOIN
+    hop_dong_chi_tiet hdct ON hd.ma_hop_dong = hdct.ma_hop_dong
+        LEFT JOIN
+    dich_vu_di_kem dvdk ON hdct.ma_dich_vu_di_kem = dvdk.ma_dich_vu_di_kem
+        LEFT JOIN
+    dich_vu dv ON hd.ma_dich_vu = dv.ma_dich_vu
+    group by dvdk.ma_dich_vu_di_kem
+    having count(dvdk.ma_dich_vu_di_kem)=1;
+    
+    -- câu 15
+    select nv.*,
+    count(nv.ma_nhan_vien) as so_hop_dong
+    
+    from
+    nhan_vien nv
+		LEFT JOIN
+    hop_dong hd on hd.ma_nhan_vien = nv.ma_nhan_vien
+        LEFT JOIN
+    hop_dong_chi_tiet hdct ON hd.ma_hop_dong = hdct.ma_hop_dong
+        LEFT JOIN
+    dich_vu_di_kem dvdk ON hdct.ma_dich_vu_di_kem = dvdk.ma_dich_vu_di_kem
+        LEFT JOIN
+    dich_vu dv ON hd.ma_dich_vu = dv.ma_dich_vu
+    group by hd.ma_nhan_vien
+    having 
+    count(nv.ma_nhan_vien)<=3;
+		
+	-- câu 16
+    select nv.*
+    from
+    nhan_vien nv
+	left JOIN
+    hop_dong hd on hd.ma_nhan_vien = nv.ma_nhan_vien
+    group by hd.ma_nhan_vien
+    
+	
  
 
  
