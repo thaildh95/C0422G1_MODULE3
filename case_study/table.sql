@@ -242,7 +242,7 @@ join hop_dong h on k.ma_khach_hang = h.ma_khach_hang
  left join hop_dong_chi_tiet ct on h.ma_hop_dong = ct.ma_hop_dong
  left join dich_vu_di_kem dv on ct.ma_dich_vu_di_kem = dv.ma_dich_vu_di_kem
  group by h.ma_hop_dong,k.ma_khach_hang
- order by h.ma_khach_hang,k.ho_ten;
+ order by k.ma_khach_hang;
  
  -- câu 6
  select 
@@ -296,9 +296,118 @@ WHERE
                 OR YEAR(hd.ngay_ket_thuc) = '2021')
 GROUP BY dv.ma_dich_vu;
 
+-- câu 8
+SELECT DISTINCT
+    khach_hang.ho_ten
+FROM
+    khach_hang;
 
-
+-- câu 9
+SELECT 
+    month(h.ngay_lam_hop_dong) as thang,
+    COUNT(h.ma_khach_hang) AS so_luong
+FROM
+    khach_hang k
+        JOIN
+    loai_khach l ON k.ma_loai_khach = l.ma_loai_khach
+        JOIN
+    hop_dong h ON k.ma_khach_hang = h.ma_khach_hang
+WHERE
+    YEAR(h.ngay_lam_hop_dong)
+        AND YEAR(h.ngay_ket_thuc) = '2021'
+GROUP BY month(h.ngay_lam_hop_dong)
+ORDER BY h.ngay_lam_hop_dong;
  
+-- câu 10
+select
+ hd.ma_hop_dong , 
+ hd.ngay_lam_hop_dong,
+ hd.ngay_ket_thuc,
+ hd.tien_dat_coc,
+ sum(hdct.so_luong) as so_luong
+ 
+ from hop_dong hd
+ left join
+ hop_dong_chi_tiet hdct on hd.ma_hop_dong = hdct.ma_hop_dong
+ left join
+ dich_vu_di_kem dvdk on hdct.ma_dich_vu_di_kem = dvdk.ma_dich_vu_di_kem
+ group by hd.ngay_lam_hop_dong;
+ 
+ -- câu 11
+SELECT 
+    dvdk.ten_dich_vu_di_kem,
+    dvdk.ma_dich_vu_di_kem
+
+FROM
+    hop_dong hd
+        LEFT JOIN
+    hop_dong_chi_tiet hdct ON hd.ma_hop_dong = hdct.ma_hop_dong
+        LEFT JOIN
+    dich_vu_di_kem dvdk ON hdct.ma_dich_vu_di_kem = dvdk.ma_dich_vu_di_kem
+        LEFT JOIN
+    khach_hang kh ON hd.ma_khach_hang = kh.ma_khach_hang
+        LEFT JOIN
+    loai_khach lk ON kh.ma_loai_khach = lk.ma_loai_khach
+WHERE lk.ten_loai_khach = 'Diamond' and
+    (kh.dia_chi LIKE '%Vinh'
+        OR kh.dia_chi LIKE '%Quảng Ngãi');
+        
+
+-- câu 12
+select 
+hd.ma_hop_dong,
+nv.ho_ten as ten_nhan_vien,
+kh.ho_ten ten_khach_hang ,
+kh.so_dien_thoai,
+ifnull(dv.ten_dich_vu,0) as ten_dich_vu,
+sum(hdct.so_luong) as so_luong,
+hd.tien_dat_coc
+ 
+ from
+ hop_dong hd
+        LEFT JOIN
+    hop_dong_chi_tiet hdct ON hd.ma_hop_dong = hdct.ma_hop_dong
+        LEFT JOIN
+    dich_vu_di_kem dvdk ON hdct.ma_dich_vu_di_kem = dvdk.ma_dich_vu_di_kem
+        LEFT JOIN
+    khach_hang kh ON hd.ma_khach_hang = kh.ma_khach_hang
+        LEFT JOIN
+    loai_khach lk ON kh.ma_loai_khach = lk.ma_loai_khach 
+		LEFT JOIN
+	dich_vu dv on hd.ma_dich_vu = dv.ma_dich_vu
+		LEFT JOIN
+	nhan_vien nv on hd.ma_nhan_vien = nv.ma_nhan_vien
+
+    where 
+ (hd.ngay_lam_hop_dong between "2020-10-01" and "2020-12-31")
+ and 
+ hd.ngay_lam_hop_dong
+ not in (
+ select hop_dong.ngay_lam_hop_dong from 
+ hop_dong
+ where hop_dong.ngay_lam_hop_dong between "2021-01-01" and "2021-06-30")
+ group by hd.ma_hop_dong;
+
+
+-- 13.	Hiển thị thông tin các Dịch vụ đi kèm được sử dụng nhiều nhất bởi các Khách hàng đã đặt phòng.
+-- (Lưu ý là có thể có nhiều dịch vụ có số lần sử dụng nhiều như nhau).
+    select dvdk.*,hdct.so_luong
+    
+  
+FROM
+    hop_dong hd
+        LEFT JOIN
+    hop_dong_chi_tiet hdct ON hd.ma_hop_dong = hdct.ma_hop_dong
+        LEFT JOIN
+    dich_vu_di_kem dvdk ON hdct.ma_dich_vu_di_kem = dvdk.ma_dich_vu_di_kem
+        LEFT JOIN
+    khach_hang kh ON hd.ma_khach_hang = kh.ma_khach_hang
+        LEFT JOIN
+    loai_khach lk ON kh.ma_loai_khach = lk.ma_loai_khach
+    
+    where 
+    
+    
  
  
 
