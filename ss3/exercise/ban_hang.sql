@@ -57,22 +57,38 @@ select order_id ,order_date,order_total_prices
 from orderr; 
 
 -- Hiển thị danh sách các khách hàng đã mua hàng, và danh sách sản phẩm được mua bởi các khách
-select c.customer_id,customer_name, product_name
-from customer c
-join orderr o on c.customer_id = o.customer_id
-join order_detail od on o.order_id = od.order_id
-join product p on od.product_id = p.product_id;
+SELECT 
+    c.customer_id, customer_name, product_name
+FROM
+    customer c
+        JOIN
+    orderr o ON c.customer_id = o.customer_id
+        JOIN
+    order_detail od ON o.order_id = od.order_id
+        JOIN
+    product p ON od.product_id = p.product_id;
 
 -- Hiển thị tên những khách hàng không mua bất kỳ một sản phẩm nào
-select customer_name 
-from customer c
-left join orderr o on c.customer_id = o.customer_id
-where isnull(order_id);
+SELECT 
+    customer_name
+FROM
+    customer c
+        LEFT JOIN
+    orderr o ON c.customer_id = o.customer_id
+WHERE
+    ISNULL(order_id);
 
 
-select o.order_id,order_date,sum(od.order_qty*product_prices) as total_prices
-from customer c
-join orderr o on c.customer_id = o.customer_id
-join order_detail od on o.order_id = od.order_id
-left join product p on od.product_id = p.product_id
-group by od.order_id
+SELECT 
+    o.order_id,
+    order_date,
+    SUM(od.order_qty * product_prices) AS total_prices
+FROM
+    customer c
+        JOIN
+    orderr o ON c.customer_id = o.customer_id
+        JOIN
+    order_detail od ON o.order_id = od.order_id
+        LEFT JOIN
+    product p ON od.product_id = p.product_id
+GROUP BY od.order_id

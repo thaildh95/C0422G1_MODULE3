@@ -1,40 +1,39 @@
 CREATE DATABASE QuanLySinhVien;
 USE QuanLySinhVien;
-CREATE TABLE Class
-(
-    ClassID   INT         NOT NULL AUTO_INCREMENT PRIMARY KEY,
+CREATE TABLE Class (
+    ClassID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     ClassName VARCHAR(60) NOT NULL,
-    StartDate DATETIME    NOT NULL,
-    Status    BIT
+    StartDate DATETIME NOT NULL,
+    Status BIT
 );
-CREATE TABLE Student
-(
-    StudentId   INT         NOT NULL AUTO_INCREMENT PRIMARY KEY,
+CREATE TABLE Student (
+    StudentId INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     StudentName VARCHAR(30) NOT NULL,
-    Address     VARCHAR(50),
-    Phone       VARCHAR(20),
-    Status      BIT,
-    ClassId     INT         NOT NULL,
-    FOREIGN KEY (ClassId) REFERENCES Class (ClassID)
+    Address VARCHAR(50),
+    Phone VARCHAR(20),
+    Status BIT,
+    ClassId INT NOT NULL,
+    FOREIGN KEY (ClassId)
+        REFERENCES Class (ClassID)
 );
-CREATE TABLE Subject
-(
-    SubId   INT         NOT NULL AUTO_INCREMENT PRIMARY KEY,
+CREATE TABLE Subject (
+    SubId INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     SubName VARCHAR(30) NOT NULL,
-    Credit  TINYINT     NOT NULL DEFAULT 1 CHECK ( Credit >= 1 ),
-    Status  BIT                  DEFAULT 1
+    Credit TINYINT NOT NULL DEFAULT 1 CHECK (Credit >= 1),
+    Status BIT DEFAULT 1
 );
 
-CREATE TABLE Mark
-(
-    MarkId    INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    SubId     INT NOT NULL,
+CREATE TABLE Mark (
+    MarkId INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    SubId INT NOT NULL,
     StudentId INT NOT NULL,
-    Mark      FLOAT   DEFAULT 0 CHECK ( Mark BETWEEN 0 AND 100),
+    Mark FLOAT DEFAULT 0 CHECK (Mark BETWEEN 0 AND 100),
     ExamTimes TINYINT DEFAULT 1,
-    UNIQUE (SubId, StudentId),
-    FOREIGN KEY (SubId) REFERENCES Subject (SubId),
-    FOREIGN KEY (StudentId) REFERENCES Student (StudentId)
+    UNIQUE (SubId , StudentId),
+    FOREIGN KEY (SubId)
+        REFERENCES Subject (SubId),
+    FOREIGN KEY (StudentId)
+        REFERENCES Student (StudentId)
 );
 INSERT INTO Class
 VALUES (1, 'A1', '2008-12-20', 1);
@@ -60,57 +59,89 @@ INSERT INTO Mark (SubId, StudentId, Mark, ExamTimes)
 VALUES (1, 1, 8, 1),
        (1, 2, 10, 2),
        (2, 1, 12, 1);
+       
        -- Hiển thị tất cả các sinh viên có tên bắt đầu bảng ký tự ‘h’
-	select*
-    from student s
-    where s.studentname like "H%";
+       
+	SELECT 
+    *
+FROM
+    student s
+WHERE
+    s.studentname LIKE 'H%' ;
     
-    -- Hiển thị các thông tin lớp học có thời gian bắt đầu vào tháng 12.
-    select*
-    from class c
-    where month(c.startdate)=12;
+    -- thông tin lớp học có thời gian bắt đầu vào tháng 12.-- 
     
-    -- Hiển thị tất cả các thông tin môn học có credit trong khoảng từ 3-5.
-    select *
-    from subject j 
-    where j.credit between 3 and 5;
+    SELECT 
+    *
+FROM
+    class c
+WHERE
+    MONTH(c.startdate) = 12;
+    
+
+	-- Hiển thị tất cả các thông tin môn học có credit trong khoảng từ 3-5.
+    
+    SELECT 
+    *
+FROM
+    subject j
+WHERE
+    j.credit BETWEEN 3 AND 5;
     
     -- Thay đổi mã lớp(ClassID) của sinh viên có tên ‘Hung’ là 2.
+    
     set sql_safe_updates = 0;
-    update student s
-    set s.classid = 2
-    where s.StudentName = "Hung";
+    UPDATE student s 
+SET 
+    s.classid = 2
+WHERE
+    s.StudentName = 'Hung';
     select * from student;
 	set sql_safe_updates = 1;
     
+    
     --  Hiển thị các thông tin: StudentName, SubName, Mark. Dữ liệu sắp xếp theo điểm thi (mark) giảm dần. nếu trùng sắp theo tên tăng dần.
-    select studentname , subname,mark
-    from student s
-    join mark m on s.studentid = m.studentid
-    join `subject` sub on m.subid = sub.subid
-    order by m.mark desc , s.studentname;
+    
+    SELECT 
+    studentname, subname, mark
+FROM
+    student s
+        JOIN
+    mark m ON s.studentid = m.studentid
+        JOIN
+    `subject` sub ON m.subid = sub.subid
+ORDER BY m.mark DESC , s.studentname;
     
     -- Hiển thị tất cả các thông tin môn học (bảng subject) có credit lớn nhất.
-    select * 
-    from `subject` 
-	where Credit = (
-    select max(Credit)
-    from `subject`
-    );
+    SELECT 
+    *
+FROM
+    `subject`
+WHERE
+    Credit = (SELECT 
+            MAX(Credit)
+        FROM
+            `subject`);
     
     -- Hiển thị các thông tin môn học có điểm thi lớn nhất.
-    select s.*, mark
-    from subject s
-     join mark m on m.subid = s.SubId
-    order by Mark desc
-    limit 1;
+    SELECT 
+    s.*, mark
+FROM
+    subject s
+        JOIN
+    mark m ON m.subid = s.SubId
+ORDER BY Mark DESC
+LIMIT 1;
     
 	-- Hiển thị các thông tin sinh viên và điểm trung bình của mỗi sinh viên, xếp hạng theo thứ tự điểm giảm dần
-    select s.*, s.studentid,s.studentname ,avg(mark)
-    from mark m
-    left join student s on m.StudentId = s.StudentId
-    group by s.StudentName
-    order by m.Mark desc;  
+    SELECT 
+    s.*, s.studentid, s.studentname, AVG(mark)
+FROM
+    mark m
+        LEFT JOIN
+    student s ON m.StudentId = s.StudentId
+GROUP BY s.StudentName
+ORDER BY m.Mark DESC;  
     
     
     
