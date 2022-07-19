@@ -149,8 +149,10 @@ delimiter $$
 create procedure add_products(in new_id int,new_code int, new_name varchar(55),
 new_amount int, new_description varchar(55), new_status varchar(55))
 begin
-insert into product(product_id,product_code,product_name,product_amount,product_description,product_status)
-value(new_id,new_code,new_name,new_amount,new_description,new_status);
+insert into
+ product(product_id,product_code,product_name,product_amount,product_description,product_status)
+value
+(new_id,new_code,new_name,new_amount,new_description,new_status);
 end $$ 
 delimiter ;
 
@@ -169,4 +171,7 @@ CREATE VIEW w_product AS
     FROM
         product;
         
-        select * from w_product;
+        SELECT 
+    *
+FROM
+    w_product;
