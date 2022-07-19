@@ -160,6 +160,25 @@ call find_info_product_by_id(111);
 call delete_product_by_id(34);
 call add_products(111,1,"Dieu Thuyen",55,"dien nuoc day du","ngon");
 alter table product add column product_price double;
+
+-- edit 
+delimiter $$
+      create procedure edit_product ( new_id int, new_code int, new_name varchar(20), new_price int, new_amount int, new_description varchar(20), new_status varchar(55))
+      begin
+		update product
+        set 
+        product_code= new_code,
+        product_name= new_name,
+        product_price = new_price, 
+        product_amount = new_amount,
+        product_description= new_description, 
+        product_status= new_status
+        where id = new_id ;
+      end $$
+      delimiter ;
+      call edit_product (1,19,'Thuy Kieu',65000,30,'thom ngon ngot nuoc',"con tem");
+
+
 -- view 
 drop view if exists w_products;-- xóa view--
 CREATE VIEW w_product AS
@@ -175,3 +194,4 @@ CREATE VIEW w_product AS
     *
 FROM
     w_product;
+    
