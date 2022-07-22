@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <style>
+        /* Nút Dropdown*/
+        .nut_dropdown {
+            background-color: #0080ff;
+            color: white;
+            padding: 16px;
+            font-size: 16px;
+            border: none;
+        }
+
+        /* Thiết lập vị trí cho thẻ div với class dropdown*/
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        /* Nội dung Dropdown */
+        .noidung_dropdown {
+            /*Ẩn nội dung các đường dẫn*/
+            display: none;
+            position: absolute;
+            background-color: #f1f1f1;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+
+        /* Thiết kế style cho các đường dẫn trong Dropdown */
+        .noidung_dropdown a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        /* thay đổi màu background khi hover vào đường dẫn */
+        .noidung_dropdown a:hover {
+            background-color: #ddd;
+        }
+
+        /* hiển thị nội dung dropdown khi hover */
+        .dropdown:hover .noidung_dropdown {
+            display: block;
+        }
+
+        /* Thay đổi màu background cho nút khi được hover */
+        .dropdown:hover .nut_dropdown {
+            background-color: #00bfff;
+        }
+
+        #input {
+            margin-left: 20px;
+            width: 300px;
+            height: 30px;
+
+        }
+
+        #button-register {
+            margin-left: 70px;
+            width: 80px;
+            height: 20px;
+            border: skyblue solid 1px;
+            box-shadow: 1px 1px 1px;
+            margin-top: 8px;
+        }
+
+        .input-login {
+            width: 100px;
+            height: 15px;
+            margin-top: 8px;
+        }
+
+        #button-search {
+            border: skyblue solid 1px;
+            box-shadow: 1px 1px 1px;
+        }
+
+        body {
+            background-image: url("https://i.ytimg.com/vi/uZgyf0p9WXk/maxresdefault.jpg");
+
+        }
+
+        .table-danh-sach {
+            margin-top: 60px;
+            width: 300px;
+            height: 200px;
+            padding: 20px;
+            margin-left: 20px;
+            font-size: 30px;
+            color: #f1f1f1;
+        }
+
+        #anh1 {
+            margin-left: 650px;
+           margin-top: 100px;
+
+        }
+        #truyen{
+            width: 600px;
+            margin-left: 400px;
+            margin-bottom: 700px;
+            color: black;
+            background-color: skyblue;
+
+        }
+        #tieude{
+            width: 600px;
+            margin-left: 600px;
+
+            color: white;
+        }
+    </style>
+</head>
+<body>
+<div style="position: absolute"><img id="anh1" src="https://www.nae.vn/ttv/ttv/public/images/story/c08afff7a363da2aac3e0de12b3677f19c90f17c6a053631281afdad2a1bc63f.jpg" height="150" width="120"/>
+    <h2 id="tieude">Phàm Nhân Tu Tiên</h2>
+    <p id="truyen">Đông Hải có một đảo nhỏ, toàn thân hiện trường hình, đông bộ so sánh rộng lớn, tây bộ so sánh nhỏ hẹp, ở trên đảo thảm thực vật sum suê, đình viện tương liên, giả sơn ao trạch, quỳnh lâu mái cong, một đội màu trắng tiên hạc ở trên không xoay quanh, xa xa nhìn tới, cả hòn đảo nhỏ cực giống một cái cực lớn hồ lô, tên là Hồ Lô Đảo, ở trên đảo có một cái họ Hàn tu tiên gia tộc, cố sự bắt đầu từ nơi này.
+
+        ***
+        Mong các đạo hữu ủng hộ truyện và Converter bằng cách:
+        - Vote truyện 5*, bấm Like, theo dõi, bình luận, tặng phiếu đề cử.
+        - Donate cho Converter qua MoMo, ZaloPay: 0984090956
+        HOẶC Vietcombank: 0081001176822 Nguyen Van Tiep
+
+        Cảm ơn các đạo hữu rất nhiều! Moa~~~!</p>>
+</div>>
+<div class="Header" style="display:flex">
+    <div class="dropdown">
+        <button class="nut_dropdown">Thể Loại</button>
+        <div class="noidung_dropdown">
+            <a href="#">Tiên Hiệp</a>
+            <a href="#">Kiếm Hiệp </a>
+            <a href="#">Đô Thị</a>
+            <a href="#">Võng Du</a>
+            <a href="#">Quân Sự</a>
+            <a href="#">Ngôn Tình</a>
+        </div>
+    </div>
+    <div class="dropdown">
+        <button class="nut_dropdown">Bảng Xếp Hạng</button>
+        <div class="noidung_dropdown">
+            <a href="#">Ưa Thích Nhất</a>
+            <a href="#">Xem Nhiều Nhất</a>
+            <a href="#">Top Tuần</a>
+            <a href="#">Top Tháng</a>
+            <a href="#">Top Năm</a>
+        </div>
+    </div>
+    <div class="dropdown">
+        <button class="nut_dropdown">Bộ Lọc</button>
+        <div class="noidung_dropdown">
+            <a href="#">Truyên 18 +</a>
+            <a href="#">Truyen 18 -</a>
+        </div>
+    </div>
+    <div class="dropdown">
+        <button class="nut_dropdown">Cửa Hàng</button>
+        <div class="noidung_dropdown">
+            <a href="https://truyen.tangthuvien.vn/">Mua Truyện</a>
+            <a href="#">Nguyệt Phiếu</a>
+            <a href="#">Donate</a>
+            <a href="#">Avatar</a>
+        </div>
+    </div>
+    <div>
+        <input id="input">
+        <button id="button-search">Tìm kiếm</button>
+    </div>
+    <div style="display: flex">
+        <button id="button-register">Tài Khoản</button>
+        <br>
+        <input class="input-login" style="display: flex">
+        <input class="input-login" style="display: flex">
+    </div>
+</div>
+<table class="table-danh-sach">
+
+    <tr>
+        <td ><img src="Untitled.png" height="39" width="40"/>Diễn Đàn</td>
+
+    </tr>
+    <tr>
+        <td><img src="vo hiep.PNG" height="40" width="37"/>Trò Chơi</td>
+
+    </tr>
+    <tr>
+        <td><img src="Capture.PNG" height="37" width="38"/>Mua Bán</td>
+
+    </tr>
+    <tr>
+        <td><img src="huyenhuyen.PNG" height="39" width="35"/>Sự Kiện</td>
+
+    </tr>
+    <tr>
+        <td><img src="ngon tinh.PNG" height="35" width="34"/>Giao Lưu</td>
+
+    </tr>
+    <tr>
+        <td><img src="khoahuyen.PNG" height="37" width="35"/>Hệ Thống</td>
+    </tr>
+
+</table>
+<p></p>>
+
+</div>
+</div>
+</div>
+
+
+</body>
+</html>
