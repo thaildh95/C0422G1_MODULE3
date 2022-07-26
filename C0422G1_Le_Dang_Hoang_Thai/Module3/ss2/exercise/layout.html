@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+
+    <style>
+        #section{
+            background-color: cornflowerblue;
+            height: 50px;
+            font-size: 30px ;
+            color: aliceblue;
+        }
+        #menu ul li {
+            list-style: none;
+            display: inline;
+            padding: 15px;
+        }
+        h1{
+            color: aliceblue;
+        }
+        #article{
+            background-color: antiquewhite;
+        }
+        #article2{
+            background-color: antiquewhite;
+            margin-left: 10px;
+            width: 400px;
+        }
+        #foot{
+            background-color: black;
+            color: aliceblue;
+        }
+
+    </style>
+    <link rel="stylesheet" href="layout.css">
+</head>
+<body>
+<div class="row head">
+    <div><h1>Monday Times</h1></div>
+</div>
+<div class="row">
+    <div id="menu"><ul>
+        <li>News</li>
+        <li>Sports</li>
+        <li>Weather</li>
+    </ul></div>
+</div>
+<div class="row">
+    <div class="col-l-8">
+        <div id="section" class="col-l-12">section</div>
+        <div id="article" class="col-l-12">
+            <h2>New Article</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                Pellentesque in porta lorem. Morbi condimentum est nibh, et consectetur tortor feugiat at.</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                Pellentesque in porta lorem. Morbi condimentum est nibh, et consectetur tortor feugiat at.</p>
+
+        </div>
+
+    </div>
+    <div id="article2" class="col-l-3">
+
+        <h2>New Article 2</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            Pellentesque in porta lorem. Morbi condimentum est nibh, et consectetur tortor feugiat at.</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            Pellentesque in porta lorem. Morbi condimentum est nibh, et consectetur tortor feugiat at.</p>
+
+    </div>
+</div>
+<div id="foot" class="row">
+    <p>© 2014 Monday Times. All rights reserved.</p>
+</div>
+</body>
+</html>

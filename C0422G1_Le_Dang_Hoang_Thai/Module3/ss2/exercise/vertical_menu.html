@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+    #menu li{
+        list-style: none;
+        position: relative;
+        cursor: cell;
+        padding: 0 20px;
+        background-color: coral;
+    }
+        #menu  li a{
+            text-decoration: none;
+            color: honeydew;
+
+        }
+        #menu li:hover{
+            background-color: black;
+
+        }
+    #menu, #menu ul, #menu li{
+        padding:0;
+        margin:0;
+    }
+        #menu ul ul {
+            position: absolute;
+            visibility: hidden;
+            left : 30px;
+            top: 0px;
+
+        }
+        #menu .ul1 li{
+            display: inline;
+            width: 200px;
+        }
+    #menu li {
+        width:  300px;
+        height: 30px;
+        padding-left: 10px;
+        vertical-align: center;
+        padding-top: 10px;
+        float: left;
+    }
+    #menu ul li:hover ul{
+        visibility:visible;
+    }
+
+
+    </style>
+</head>
+<body>
+<h3>ACCP i10</h3>
+<div id="menu">
+    <ul class="ul1">
+        <li><a href="#">sem 1</a>
+        <ul>
+            <li><a href="#">Computing Fundametal</a></li>
+            <li><a href="#">C Programing</a></li>
+            <li><a href="#">Building Dynamic Website</a></li>
+            <li><a href="#">MS Transact</a></li>
+            <li><a href="#">Project</a></li>
+        </ul></li>
+        <li><a href="#">sem 2</a>
+            <ul>
+                <li><a href="#">Computing Fundametal</a></li>
+                <li><a href="#">C Programing</a></li>
+                <li><a href="#">Building Dynamic Website</a></li>
+                <li><a href="#">MS Transact</a></li>
+                <li><a href="#">Project</a></li>
+            </ul></li>
+        <li><a href="#">sem 3</a>
+            <ul>
+                <li><a href="#">Computing Fundametal</a></li>
+                <li><a href="#">C Programing</a></li>
+                <li><a href="#">Building Dynamic Website</a></li>
+                <li><a href="#">MS Transact</a></li>
+                <li><a href="#">Project</a></li>
+            </ul></li>
+        <li><a href="#">sem 4</a>
+            <ul>
+                <li><a href="#">Computing Fundametal</a></li>
+                <li><a href="#">C Programing</a></li>
+                <li><a href="#">Building Dynamic Website</a></li>
+                <li><a href="#">MS Transact</a></li>
+                <li><a href="#">Project</a></li>
+            </ul></li>
+    </ul>
+</div>
+</body>
+</html>

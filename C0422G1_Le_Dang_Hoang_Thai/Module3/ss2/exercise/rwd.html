@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="rwd.css">
+    <script src="https://kit.fontawesome.com/d6e19ea644.js" crossorigin="anonymous"></script>
+    <style>
+
+        body {
+            font-family: Arial;
+        }
+
+
+        #menu ul, #menu li {
+            padding: 0;
+            margin: 0;
+        }
+
+        #menu li {
+            position: relative;
+            float: left;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            background-color: grey;
+
+        }
+
+        #menu li a {
+            width: 100px;
+            height: 30px;
+            display: block;
+            text-decoration: none;
+            text-align: center;
+            line-height: 30px;
+            color: black;
+        }
+
+        #menu ul ul li a {
+            width: 200px;
+            text-align: left;
+            padding-left: 10px;
+            color: antiquewhite;
+        }
+
+        #menu li a:hover {
+            background-color: red;
+        }
+
+        #menu ul ul {
+            position: absolute;
+            top: 30px;
+            left: 15px;
+            visibility: hidden;
+        }
+
+        #menu ul li:hover ul {
+            visibility: visible;
+        }
+
+        #logout {
+            margin-left: 1600px;
+            list-style: none;
+            margin-bottom: 500px;
+        }
+
+        #logout1 {
+            margin-left: 970px;
+            list-style: none;
+            margin-top: 4px;
+            padding-bottom: 5px;
+        }
+
+        button {
+            height: 150px;
+            width: 150px;
+            margin: 10px;
+            margin-left: 200px;
+            background-color: aliceblue;
+        }
+        .col-l-3{
+            height: 900px;
+            background-color: whitesmoke;
+        }
+        .bt{
+            padding: 20px;
+            margin-left: 40px;
+            background-color: aliceblue;
+        }
+        #foot {
+            text-align: center;
+            font-size: 20px;
+            padding-top: 10px;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="row head">
+    <div id="menu">
+
+        <ul>
+            <li><a href="#">Logo</a>
+                <ul>
+                    <li><a href="#">link</a></li>
+                    <li><a href="#">link</a></li>
+                    <li><a href="#">link</a></li>
+                    <li><a href="#">link</a></li>
+                    <li><a href="#">link</a></li>
+
+                </ul>
+            </li>
+            <li><a href="#">Home </a>
+                <ul>
+                    <li><a href="#">link</a></li>
+                    <li><a href="#">link</a></li>
+                    <li><a href="#">link</a></li>
+                    <li><a href="#">link</a></li>
+                </ul>
+            </li>
+            <li><a href="#">About</a></li>
+
+            <li><a href="#">Home </a>
+                <ul>
+                    <li><a href="#">link</a></li>
+                    <li><a href="#">link</a></li>
+                    <li><a href="#">link</a></li>
+                    <li><a href="#">link</a></li>
+                </ul>
+            </li>
+
+            </li>
+            <li><a href="#">Project</a>
+
+                <ul>
+                    <li><a href="#">link</a></li>
+                    <li><a href="#">link</a></li>
+                    <li><a href="#">link</a></li>
+                    <li><a href="#">link</a></li>
+                </ul>
+            </li>
+            <li><a href="#">Contact</a>
+                <ul>
+                    <li><a href="#">link</a></li>
+                    <li><a href="#">link</a></li>
+                    <li><a href="#">link</a></li>
+                    <li><a href="#">link</a></li>
+                </ul>
+            </li>
+
+        </ul>
+    </div>
+    <h3><i id="logout1" class="fa-solid fa-arrow-right-from-bracket"></i></h3>
+    <h3>logout</h3>
+    <div>
+
+    </div>
+</div>
+
+</div>
+<div class="row">
+    <div class="col-l-3">
+
+        <div class="col-l-3">
+            <button class="bt">ADS</button>
+            <button class="bt">ADS</button>
+            <br>
+            <button class="bt">ADS</button>
+            <button class="bt">ADS</button>
+
+        </div>
+    </div>
+    <div class="col-l-6">
+
+        <h2>Welcome</h2>
+        <p>Lorem ipsum dolor st amet, consecteturadipiscing cit, sed do elusmod tempor incicidunt utIdbore et
+            .dolore magna alqua. Ut enim ad miim veniam, qus nostrud oxeroitation ularmco laboris ni ut aicuÏp ex 6a.
+            'commodo coneequat. Excepfeursỉnt ocaecat cupidatat non proident, sunt in culpa qui offẨa deserunt
+            rmolit arim ld eetlaborum consectetur ađpiscing li, sed do eiuerrod ternpor inoiđdunt utlabore øt dolore.
+            magna alqua. Ut enim ad miim veniam, quls nostrud exereitaon ulamco laboris rieiutaïqujp ox ea
+            .cormmodo consequst.</p>
+        <hr>
+        <div>
+            <h2>Test</h2>
+            <p>Lorem ipsum...</p>
+        </div>
+    </div>
+    <div class="col-l-3">
+        <button>ADS</button>
+        <button>ADS</button>
+        <br>
+        <button>ADS</button>
+        <button>ADS</button>
+    </div>
+
+
+</div>
+<div id="foot" class="row head">
+    <div class="col-l-12">footer test</div>
+</div>
+
+</body>
+</html>
