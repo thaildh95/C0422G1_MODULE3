@@ -1,7 +1,68 @@
+#menu li {
+    list-style: none;
+    display: inline;
+    padding: 10px;
+
+}
+
+#menu {
+
+    margin-left: 650px;
+
+}
+
+#menu li:hover {
+    background-color: bisque;
+    font-weight: bolder;
+}
+
+#videos {
+    padding: 20px;
+
+    position: fixed;
+    width: 320px;
+    height: 500px;
+}
+#videos:hover{
+    overflow: scroll visible ;
+
+}
+#left{
+
+}
+
+#search {
+    margin-left: 700px;
+    width: 400px;
+  
+
+}
+
+input {
+    width: 250px;
+    height: 30px;
+    border-radius: 23px;
+}
+
+button {
+    width: 100px;
+    height: 30px;
+    border-radius: 23px;
+
+}
+
+body {
+    background-image: url("https://i.pinimg.com/736x/4a/7d/90/4a7d9007b984443543e4780f0149faa7.jpg");
+
+}
 .head{
     background: grey;
     height: 40px;
 }
+#head{
+    position: fixed;
+}
+
 .left{
     background: #0f6674;
 }
@@ -16,6 +77,9 @@
     display: flex;
     /*Nếu như không đủ độ rộng thì nó sẽ rớt xuống*/
     flex-wrap: wrap;
+}
+p{
+    margin-left: 30px ;
 }
 ​
 /*màn hình điện thoai*/
