@@ -5,18 +5,42 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 
-@WebServlet(name = "CalculateServlet", value = "/CalculateServlet")
+@WebServlet(name = "CalculateServlet", value = "/Calculate")
 public class CalculateServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         double firstOperand = Double.parseDouble(request.getParameter("firstOperand"));
         double secondOperand = Double.parseDouble(request.getParameter("secondOperand"));
-        char operator = request.getParameter("operator").charAt(0);
+        String operator = request.getParameter("operator");
+        String result="";
 
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("calculational.jsp");
-        request.getParameter("firstOperand");
-        request.getParameter("secondOperand");
-        request.getParameter("operator");
+        switch (operator){
+            case "+" :
+                result = ""+ (firstOperand+secondOperand);
+                break;
+            case "-" :
+                result = "" +(firstOperand-secondOperand);
+                break;
+            case "*" :
+                result = "" +(firstOperand*secondOperand);
+                break;
+            case "/" :
+                if (secondOperand!=0){
+                    result = "" + (firstOperand/secondOperand);
+                }else {
+                    try {
+                        throw new RuntimeException("can't multi for 0");
+                    }
+                  catch (Exception e){
+                        result = e.getMessage();
+                  }
+                }
+                break;
+        }
+
+        request.setAttribute("result",result);
+        request.getRequestDispatcher("calculational.jsp").forward(request,response);
+
 
 
     }

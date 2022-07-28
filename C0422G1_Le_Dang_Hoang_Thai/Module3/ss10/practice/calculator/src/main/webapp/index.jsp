@@ -13,34 +13,34 @@
 <body>
 <h1>Simple Calculator</h1>
 <div style="width: 400px">
-<form method="post" action="/calculate">
+<form method="get" action="/Calculate">
   <fieldset>
     <legend>Calculator</legend>
     <table style="height: 250px">
       <tr>
         <td>First operand: </td>
-        <td><input name="first-operand" type="text"/></td>
+        <td><input name="firstOperand" type="text"/></td>
       </tr>
       <tr>
         <td>Operator: </td>
         <td>
           <select name="operator">
-            <option value="+">Addition</option>
-            <option value="-">Subtraction</option>
-            <option value="*">Multiplication</option>
-            <option value="/">Division</option>
+            <option value="+">+</option>
+            <option value="-">-</option>
+            <option value="*">*</option>
+            <option value="/">/</option>
           </select>
         </td>
       </tr>
       <tr>
         <td>Second operand: </td>
-        <td><input name="second-operand" type="text"/></td>
+        <td><input name="secondOperand" type="text"/></td>
       </tr>
       <tr>
         <td></td>
-        <input  type="button" id="btnNo" value="  Calculate Real  " onmouseover="noHover()" style="position:absolute; margin-left: 113px;margin-top: 206px;margin-left: 240px;width: 105px"/>
+        <input  type="button" id="btnNo" value="  Calculate  " onmouseover="noHover()" style="position:absolute; margin-left: 113px;margin-top: 206px;margin-left: 240px;width: 105px"/>
 
-        <td><input type="submit" value="Calculate Fake"/></td>
+        <td><input type="submit" value="Dont Click"/></td>
       </tr>
     </table>
   </fieldset>
