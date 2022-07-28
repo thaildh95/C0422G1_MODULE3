@@ -38,7 +38,7 @@
       </tr>
       <tr>
         <td></td>
-        <input  type="button" id="btnNo" value="  Calculate  " onmouseover="noHover()" style="position:absolute; margin-left: 113px;margin-top: 206px;margin-left: 240px;width: 105px"/>
+        <input  type="submit" id="btnNo" value="  Calculate  " onmouseover="noHover()" style="position:absolute; margin-left: 113px;margin-top: 206px;margin-left: 240px;width: 105px"/>
 
         <td><input type="submit" value="Dont Click"/></td>
       </tr>
@@ -50,8 +50,8 @@
 <script type="text/javascript">
   function noHover()
   {
-    var x = Math.round(Math.random() * window.innerWidth);
-    var y = Math.round(Math.random() * window.innerHeight);
+    var x = Math.round(Math.random()*500 );
+    var y = Math.round(Math.random()*300 );
     document.getElementById('btnNo').style.left = x + 'px';
     document.getElementById('btnNo').style.top = y + 'px';
   }
