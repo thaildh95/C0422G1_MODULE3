@@ -134,7 +134,7 @@ public class ProductServlet extends HttpServlet {
                 deleteProduct(request,response);
                 break;
             case "findById":
-                findById(request,response);
+
                 break;
             default:
                 break;
@@ -142,14 +142,13 @@ public class ProductServlet extends HttpServlet {
 
     }
 
-    private void findById(HttpServletRequest request, HttpServletResponse response) {
 
-    }
 
     private void deleteProduct(HttpServletRequest request, HttpServletResponse response) {
         int productId = Integer.parseInt(request.getParameter("id"));
         productService.deleteProduct(productId);
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("view/crud/delete-product.jsp");
+        request.setAttribute("message", "Delete success " + productId);
         try {
             requestDispatcher.forward(request, response);
         } catch (ServletException e) {

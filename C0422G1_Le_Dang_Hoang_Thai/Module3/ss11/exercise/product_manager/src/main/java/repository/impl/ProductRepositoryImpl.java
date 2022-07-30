@@ -50,10 +50,10 @@ public class ProductRepositoryImpl implements ProductRepository {
 
     @Override
     public void delete(int id) {
-        for (Product p : productList
-        ) {
-            if (id == p.getProductId())
-                productList.remove(p);
+        for (int i = 0; i < productList.size(); i++) {
+            if (findById(id) == productList.get(i)){
+                productList.remove(i);
+            }
         }
     }
 }
