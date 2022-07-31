@@ -35,9 +35,16 @@ public class ProductServlet extends HttpServlet {
                 break;
             case "search" :
                 showSearchByName(request,response);
+
+            case "detail":
+                detailProduct(request,response);
             default:
                 showListProduct(request, response);
         }
+    }
+
+    private void showDetailProduct(HttpServletRequest request, HttpServletResponse response) {
+
     }
 
     @Override
@@ -60,8 +67,25 @@ public class ProductServlet extends HttpServlet {
             case "search":
                 searchByName(request,response);
                 break;
+            case "detail" :
+                detailProduct(request,response);
             default:
                 break;
+        }
+
+    }
+
+    private void detailProduct(HttpServletRequest request, HttpServletResponse response) {
+        int productId = Integer.parseInt(request.getParameter("id"));
+       Product product = productService.findById(productId);
+       request.setAttribute("product",product);
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/view/crud/detail.jsp");
+        try {
+            requestDispatcher.forward(request, response);
+        } catch (ServletException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
     }
@@ -157,7 +181,6 @@ public class ProductServlet extends HttpServlet {
             e.printStackTrace();
         }
     }
-
 
 
     private void searchByName(HttpServletRequest request, HttpServletResponse response) {

@@ -31,11 +31,11 @@ public class ProductServiceImpl implements Service {
     productRepository.delete(productId);
     }
 
-
     @Override
-    public void displayProductInfo() {
-
+    public void detailProduct() {
+    productRepository.findAll();
     }
+
 
     @Override
     public Product findById(int productId) {

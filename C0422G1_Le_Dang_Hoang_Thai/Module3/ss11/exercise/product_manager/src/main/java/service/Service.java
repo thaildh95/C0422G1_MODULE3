@@ -11,7 +11,7 @@ public interface Service {
 
     void updateProduct(int productId, Product product);
     void deleteProduct(int productId);
-    void displayProductInfo();
+    void detailProduct();
     Product findById(int productId);
-   List<Product> searchByName(String productName);
+    List<Product> searchByName(String productName);
 }

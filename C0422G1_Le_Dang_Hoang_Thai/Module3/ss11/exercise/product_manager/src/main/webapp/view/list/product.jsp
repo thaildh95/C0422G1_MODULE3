@@ -68,7 +68,14 @@
             </td>
             <td><a href="/Product?action=delete&id=${product.productId}">
                 <button class="btn btn-primary">delete</button>
-            </a></td>
+            </a>
+            </td>
+
+            <td><a href="/Product?action=detail&id=${product.productId}">
+                <button name="action" value="detail" class="btn btn-primary">detail</button>
+            </a>
+            </td>
+            <div>
 <%--            <td>--%>
 <%--                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal-${product.productId}">--%>
 <%--                    Delete--%>
@@ -93,6 +100,7 @@
 <%--                    </div>--%>
 <%--                </div>--%>
 <%--            </td>--%>
+           </div>
         </tr>
     </c:forEach>
     <!-- Button trigger modal -->
