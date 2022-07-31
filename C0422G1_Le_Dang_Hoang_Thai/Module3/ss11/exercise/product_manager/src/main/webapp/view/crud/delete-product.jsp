@@ -19,7 +19,7 @@
 <c:if test="${message!=null}">
     <p>${message}</p>
 </c:if>
-<form method="post">
+<form  method="post">
     <h3>Bạn có muốn xoá không?</h3>
     <fieldset>
         <legend>Thông tin sản phẩm</legend>

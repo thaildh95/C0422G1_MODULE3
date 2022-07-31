@@ -33,9 +33,27 @@ public class ProductServlet extends HttpServlet {
             case "delete":
                 showDeleteForm(request,response);
                 break;
+            case "search" :
+                showSearchByName(request,response);
             default:
                 showListProduct(request, response);
         }
+    }
+
+    private void showSearchByName(HttpServletRequest request, HttpServletResponse response) {
+        String productName = request.getParameter("productName");
+        List<Product> productList = productService.searchByName(productName);
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("view/list/product.jsp");
+        request.setAttribute("list", productList);
+        try {
+            requestDispatcher.forward(request, response);
+
+        } catch (ServletException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
     private void showDeleteForm(HttpServletRequest request, HttpServletResponse response) {
@@ -57,7 +75,6 @@ public class ProductServlet extends HttpServlet {
         Product product = productService.findById(productId);
         request.setAttribute("product", product);
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("/view/crud/edit-product.jsp");
-
         try {
             requestDispatcher.forward(request, response);
         } catch (ServletException e) {
@@ -127,14 +144,14 @@ public class ProductServlet extends HttpServlet {
             case "add":
                 addProduct(request, response);
                 break;
-            case "update":
+            case "edit":
                 editProduct(request, response);
                 break;
             case "delete":
                 deleteProduct(request,response);
                 break;
-            case "findById":
-
+            case "search":
+                searchByName(request,response);
                 break;
             default:
                 break;
@@ -142,6 +159,25 @@ public class ProductServlet extends HttpServlet {
 
     }
 
+    private void searchByName(HttpServletRequest request, HttpServletResponse response) {
+        RequestDispatcher requestDispatcher;
+        String productName = request.getParameter("productName");
+        List<Product> productList = productService.searchByName(productName);
+        if (productList.isEmpty()){
+            requestDispatcher = request.getRequestDispatcher("view/crud/404.jsp");
+        }else {
+            requestDispatcher = request.getRequestDispatcher("view/list/product.jsp");
+            request.setAttribute("list",productList);
+        }
+
+        try {
+            requestDispatcher.forward(request, response);
+        } catch (ServletException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
 
     private void deleteProduct(HttpServletRequest request, HttpServletResponse response) {
@@ -162,21 +198,14 @@ public class ProductServlet extends HttpServlet {
     
 
     private void editProduct(HttpServletRequest request, HttpServletResponse response) {
-        int productId = Integer.parseInt(request.getParameter("productId"));
-        String productName = request.getParameter("productName");
-        double productPrice = Double.parseDouble(request.getParameter("productPrice"));
-        String productDescription = request.getParameter("productDescription");
-        String producerName = request.getParameter("producerName");
+        int productId = Integer.parseInt(request.getParameter("id"));
+        String productName = request.getParameter("name");
+        double productPrice = Double.parseDouble(request.getParameter("price"));
+        String productDescription = request.getParameter("description");
+        String producerName = request.getParameter("producer");
         Product product = new Product(productId, productName, productPrice, productDescription, producerName);
         productService.updateProduct(productId, product);
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/view/crud/edit-product.jsp");
-        try {
-            requestDispatcher.forward(request, response);
-        } catch (ServletException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+       showListProduct(request,response);
 
     }
 }

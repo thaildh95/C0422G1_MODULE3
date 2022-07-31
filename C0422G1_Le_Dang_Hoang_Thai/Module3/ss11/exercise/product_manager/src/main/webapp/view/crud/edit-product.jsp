@@ -17,28 +17,28 @@
 <div style="width: 400px; margin: auto; height: 500px">
     <fieldset style="box-shadow: 1px 2px 3px 3px skyblue;background: bisque">
         <legend>Product Info</legend>
-        <form style="width: 400px; padding-top: 10px">
+        <form action="/Product" method="post" style="width: 400px; padding-top: 10px">
             <div class="mb-3" style="padding-top: 10px">
                 <label for="id" class="form-label">Product ID</label>
-                <input type="text" class="form-control" id="Id" aria-describedby="emailHelp">
+                <input type="text" class="form-control" id="Id" aria-describedby="emailHelp" name="id">
             </div>
             <div class="mb-3" style="padding-top: 10px">
                 <label for="name" class="form-label">Product Name</label>
-                <input type="text" class="form-control" id="name" aria-describedby="emailHelp">
+                <input type="text" class="form-control" id="name" aria-describedby="emailHelp" name="name">
             </div>
             <div class="mb-3" style="padding-top: 10px">
                 <label for="price" class="form-label">Product Price</label>
-                <input type="text" class="form-control" id="price" aria-describedby="emailHelp">
+                <input type="text" class="form-control" id="price" aria-describedby="emailHelp" name="price">
             </div>
             <div class="mb-3" style="padding-top: 10px">
                 <label for="description" class="form-label">Product Description</label>
-                <input type="text" class="form-control" id="description" aria-describedby="emailHelp">
+                <input type="text" class="form-control" id="description" aria-describedby="emailHelp" name="description">
             </div>
             <div class="mb-3" style="padding-top: 10px">
                 <label for="producer" class="form-label">Producer Name</label>
-                <input type="text" class="form-control" id="producer" aria-describedby="emailHelp"><br>
+                <input type="text" class="form-control" id="producer" aria-describedby="emailHelp" name="producer"><br>
 
-                <button style="padding-top: 10px;margin-left: 250px;margin-top: 10px" type="submit" class="btn btn-primary">Submit</button>
+                <button style="padding-top: 10px;margin-left: 250px;margin-top: 10px" type="submit" class="btn btn-primary" name="action" value="edit">Submit</button>
             </div>
         </form>
     </fieldset>
