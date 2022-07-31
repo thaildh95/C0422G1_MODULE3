@@ -40,6 +40,32 @@ public class ProductServlet extends HttpServlet {
         }
     }
 
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
+        String action = request.getParameter("action");
+        if (action == null) {
+            action = "";
+        }
+        switch (action) {
+            case "add":
+                addProduct(request, response);
+                break;
+            case "edit":
+                editProduct(request, response);
+                break;
+            case "delete":
+                deleteProduct(request,response);
+                break;
+            case "search":
+                searchByName(request,response);
+                break;
+            default:
+                break;
+        }
+
+    }
+
     private void showSearchByName(HttpServletRequest request, HttpServletResponse response) {
         String productName = request.getParameter("productName");
         List<Product> productList = productService.searchByName(productName);
@@ -133,31 +159,6 @@ public class ProductServlet extends HttpServlet {
     }
 
 
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setCharacterEncoding("UTF-8");
-        String action = request.getParameter("action");
-        if (action == null) {
-            action = "";
-        }
-        switch (action) {
-            case "add":
-                addProduct(request, response);
-                break;
-            case "edit":
-                editProduct(request, response);
-                break;
-            case "delete":
-                deleteProduct(request,response);
-                break;
-            case "search":
-                searchByName(request,response);
-                break;
-            default:
-                break;
-        }
-
-    }
 
     private void searchByName(HttpServletRequest request, HttpServletResponse response) {
         RequestDispatcher requestDispatcher;

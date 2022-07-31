@@ -10,15 +10,19 @@
 <html>
 <head>
     <title>Title</title>
-    <link rel="stylesheet" href="C:\CODEGYM\module_3\C0422G1_Le_Dang_Hoang_Thai\Module3\ss11\exercise\product_manager\bootstrap-5.0.2-dist\css\bootstrap.css">
-    <link rel="stylesheet" href="C:\CODEGYM\module_3\C0422G1_Le_Dang_Hoang_Thai\Module3\ss11\exercise\product_manager\bootstrap-5.0.2-dist\js\bootstrap.js">
-
+    <link rel="stylesheet" href="view/bootstrap-5.0.2-dist/css/bootstrap.min.css">
+    <style>
+        legend{text-align: center}
+        input{
+            margin-left: 45px;
+        }
+    </style>
 </head>
 <body>
 <c:if test="${message!=null}">
     <p>${message}</p>
 </c:if>
-<div style="width: 400px; margin: auto; height: 500px">
+<div style="width: 500px; margin: auto; height: 500px">
 <fieldset style="box-shadow: 1px 2px 3px 3px skyblue;background: bisque">
     <legend>Product Info</legend>
 <form style="width: 400px; padding-top: 10px" action="/Product"  method="post">
@@ -42,11 +46,12 @@
         <label for="producer" class="form-label">Producer Name</label>
         <input type="text" class="form-control" id="producer" name="producerName" aria-describedby="emailHelp"><br>
 
-    <button  style="padding-top: 10px;margin-left: 250px;margin-top: 10px" type="submit" class="btn btn-primary" name="action" value="add" >Submit</button>
+    <button  style="padding-top: 10px;margin-left: 200px;margin-top: 10px" type="submit" class="btn btn-primary" name="action" value="add" >Submit</button>
     </div>
 </form>
 </fieldset>
 </div>
-
+<script src="../bootstrap-5.0.2-dist/jquery/jquery-3.6.0.min.js"></script>
+<script src="../bootstrap-5.0.2-dist/js/bootstrap.min.js"></script>
 </body>
 </html>
