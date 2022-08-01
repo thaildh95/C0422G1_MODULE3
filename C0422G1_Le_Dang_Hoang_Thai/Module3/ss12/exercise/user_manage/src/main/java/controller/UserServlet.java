@@ -12,7 +12,7 @@ import java.util.List;
 
 @WebServlet(name = "UserServlet", urlPatterns = {"/user"})
 public class UserServlet extends HttpServlet {
-     private static IService service = new UserServiceImpl();
+    private static IService service = new UserServiceImpl();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -23,15 +23,16 @@ public class UserServlet extends HttpServlet {
         }
         switch (action) {
             case "add":
-                showFormAdd(request,response);
+                showFormAdd(request, response);
                 break;
             case "update":
-                showUpdateForm(request,response);
+                showUpdateForm(request, response);
                 break;
             case "delete":
-                deleteUser(request,response);
+                deleteUser(request, response);
                 break;
-            default: showListUser(request, response);
+            default:
+                showListUser(request, response);
                 break;
         }
     }
@@ -44,12 +45,12 @@ public class UserServlet extends HttpServlet {
         }
         switch (action) {
             case "add":
-                addUser(request,response);
+                addUser(request, response);
                 break;
             case "update":
                 break;
             case "delete":
-                deleteUser(request,response);
+                deleteUser(request, response);
                 break;
             case "search":
                 break;
@@ -63,10 +64,18 @@ public class UserServlet extends HttpServlet {
         String name = request.getParameter("name");
         String email = request.getParameter("email");
         String country = request.getParameter("country");
-        User user = new User(id,name,email,country);
+        User user = new User(id, name, email, country);
         service.add(user);
         request.setAttribute("mesage", "add success");
-        showFormAdd(request,response);
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("view/crud/add.jsp");
+        showFormAdd(request, response);
+        try {
+            requestDispatcher.forward(request, response);
+        } catch (ServletException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void sortUser(HttpServletRequest request, HttpServletResponse response) {
@@ -75,17 +84,18 @@ public class UserServlet extends HttpServlet {
 
     private void deleteUser(HttpServletRequest request, HttpServletResponse response) {
         int id = Integer.parseInt(request.getParameter("id"));
-        User user = service.findById(id);
-        showListUser(request,response);
-
+        service.delete(id);
+        showListUser(request, response);
     }
 
+
+
     private void showUpdateForm(HttpServletRequest request, HttpServletResponse response) {
-            int id = Integer.parseInt(request.getParameter("id"));
-            User user = service.findById(id);
-            RequestDispatcher requestDispatcher;
-        request.setAttribute("user",user);
-        requestDispatcher= request.getRequestDispatcher("view/crud/update.jsp");
+        int id = Integer.parseInt(request.getParameter("id"));
+        User user = service.findById(id);
+        RequestDispatcher requestDispatcher;
+        request.setAttribute("user", user);
+        requestDispatcher = request.getRequestDispatcher("view/crud/update.jsp");
         try {
             requestDispatcher.forward(request, response);
         } catch (ServletException e) {
@@ -108,9 +118,9 @@ public class UserServlet extends HttpServlet {
     }
 
     private void showListUser(HttpServletRequest request, HttpServletResponse response) {
-      RequestDispatcher requestDispatcher = request.getRequestDispatcher("view/list.jsp");
-      List<User> userList = service.findAll();
-      request.setAttribute("list",userList);
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("view/list.jsp");
+        List<User> userList = service.findAll();
+        request.setAttribute("list", userList);
         try {
             requestDispatcher.forward(request, response);
         } catch (ServletException e) {

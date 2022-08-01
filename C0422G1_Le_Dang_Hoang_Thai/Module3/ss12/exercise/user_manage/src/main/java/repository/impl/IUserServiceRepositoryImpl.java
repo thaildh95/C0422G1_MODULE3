@@ -14,7 +14,7 @@ public class IUserServiceRepositoryImpl implements IUserServiceRepository {
     private final String SELECT_ALL = "select *from users ";
     private final String SELECT_ALL_Sort = "select *from users order by name";
     private final String INSERT_INTO = "insert into users(id,name,email,country)" +
-            "value(?,?,?)";
+            "values(?,?,?,?)";
     private final String DELETE_USER = "delete from users where id = ?";
     private final String UPDATE_USER = "update users set name =?,email =?,country =? where id = ?";
 
@@ -56,6 +56,7 @@ public class IUserServiceRepositoryImpl implements IUserServiceRepository {
             preparedStatement.setString(2, user.getName());
             preparedStatement.setString(3, user.getEmail());
             preparedStatement.setString(4, user.getCountry());
+            preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }

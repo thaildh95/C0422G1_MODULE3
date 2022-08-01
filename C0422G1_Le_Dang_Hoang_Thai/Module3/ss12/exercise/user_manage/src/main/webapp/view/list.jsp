@@ -18,7 +18,7 @@
         <a  style="color:#dc3545 " class="navbar-brand">
             <h1 class="bg-light" style="border: 1px black;border-radius: 13px;box-shadow: 1px 2px 2px 3px">User List</h1></a>
         <div class="mb-3" style="padding-top: 10px">
-            <a href="/user?action=add">    <button  style="padding-top: 10px;margin-left: 200px;margin-top: 10px" type="submit" class="btn btn-primary" name="action" value="add" >Add New User</button></a>
+            <a href="/user?action=add"><button  style="padding-top: 10px;margin-left: 200px;margin-top: 10px" type="submit" class="btn btn-primary" >Add New User</button></a>
 
 
         </div>
@@ -46,7 +46,7 @@
             <td>${user.email}</td>
             <td>${user.country}</td>
             <td><a href="/user?action=update&id=${user.id}">Edit</a></td>
-            <td><a href="/user?action=delete&id=${user.id}">delete</a></td>
+            <td><a href="/user?action=delete&id=${user.id}">Delete</a></td>
         </tr>
     </c:forEach>
 
