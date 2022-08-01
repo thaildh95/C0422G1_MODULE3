@@ -10,23 +10,34 @@
 <html>
 <head>
     <title>Title</title>
+    <link rel="stylesheet" href="view/bootstrap-5.0.2-dist/css/bootstrap.min.css">
 </head>
 <body>
-<a href="/user?action=add">thêm mới</a>
-<form action="/sser?action=search" method="post">
-    <input type="text" name="search">
-    <button type="submit">tìm</button>
-</form>
-<a href="/user?action=sort">
-    <button type="submit">Xắp xếp</button>
-</a>
-<table border="1px">
+<nav class="navbar navbar-light bg">
+    <div class="container-fluid">
+        <a  style="color:#dc3545 " class="navbar-brand">
+            <h1 class="bg-light" style="border: 1px black;border-radius: 13px;box-shadow: 1px 2px 2px 3px">User List</h1></a>
+        <div class="mb-3" style="padding-top: 10px">
+            <a href="/user?action=add">    <button  style="padding-top: 10px;margin-left: 200px;margin-top: 10px" type="submit" class="btn btn-primary" name="action" value="add" >Add New User</button></a>
+
+
+        </div>
+        <form class="d-flex" action="/user?action=search" method="post">
+
+            <input type="text" name="username" placeholder="Search">
+            <button type="submit" class="btn btn-primary" name="action" value="search">Submit</button>
+
+        </form>
+        </form>
+    </div>
+</nav>
+<table class="table table-striped">
     <tr>
         <th>id</th>
         <th>name</th>
         <th>email</th>
         <th>country</th>
-        <th>Update</th>
+
     </tr>
     <c:forEach var="user" items="${list}">
         <tr>
@@ -40,5 +51,10 @@
     </c:forEach>
 
 </table>
+
+
+
+<script src="../bootstrap-5.0.2-dist/jquery/jquery-3.6.0.min.js"></script>
+<script src="../bootstrap-5.0.2-dist/js/bootstrap.min.js"></script>
 </body>
 </html>
