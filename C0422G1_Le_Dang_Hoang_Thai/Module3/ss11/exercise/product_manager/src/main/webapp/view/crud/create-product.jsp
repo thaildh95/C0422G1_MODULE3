@@ -47,10 +47,15 @@
         <input type="text" class="form-control" id="producer" name="producerName" aria-describedby="emailHelp"><br>
 
     <button  style="padding-top: 10px;margin-left: 200px;margin-top: 10px" type="submit" class="btn btn-primary" name="action" value="add" >Submit</button>
+        <a class="btn btn-light" href="/Product"><button>Back To Mainpage</button></a>
     </div>
 </form>
 </fieldset>
 </div>
+
+
+
+
 <script src="../bootstrap-5.0.2-dist/jquery/jquery-3.6.0.min.js"></script>
 <script src="../bootstrap-5.0.2-dist/js/bootstrap.min.js"></script>
 </body>

@@ -37,8 +37,10 @@
           </tr>
           <tr>
       </table>
-      <img src="https://cdn.tgdd.vn/Products/Images/42/153856/iphone-xi-xanhla-200x200.jpg" width="230px" height="300px" alt="">
+      <img src="https://cdn.tgdd.vn/Products/Images/42/153856/iphone-xi-xanhla-200x200.jpg" width="230px" height="300px" alt=""><br>
+     <p><a class="btn btn-light" href="/Product"><button>Back To Mainpage</button></a></p>
   </fieldset>
+
 </form>
 </body>
 </html>

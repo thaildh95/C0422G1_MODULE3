@@ -30,7 +30,7 @@
     <fieldset style="box-shadow: 1px 2px 3px 3px skyblue;background: bisque">
         <legend>Product Info</legend>
         <form action="/Product" method="post" style="width: 400px">
-            <div class="mb-3" style="padding-top: 10px">
+            <div class="mb-3" style="padding-top: 10px" disabled>
                 <label for="id" class="form-label" >Product ID</label>
                 <input required type="text" class="form-control" id="Id" aria-describedby="emailHelp" name="id">
             </div>
@@ -51,12 +51,13 @@
                 <input required type="text" class="form-control" id="producer" aria-describedby="emailHelp" name="producer"><br>
 
                 <button style="padding-top: 10px;margin-left: 200px;margin-top: 10px" type="submit"  name="action" value="edit" class="btn btn-primary">Submit</button>
-
             </div>
         </form>
     </fieldset>
 </div>
-
+<p>
+    <a href="/Product"><button>Quay về trang chủ</button></a>
+</p>
 <script src="../bootstrap-5.0.2-dist/jquery/jquery-3.6.0.min.js"></script>
 <script src="../bootstrap-5.0.2-dist/js/bootstrap.min.js"></script>
 </body>

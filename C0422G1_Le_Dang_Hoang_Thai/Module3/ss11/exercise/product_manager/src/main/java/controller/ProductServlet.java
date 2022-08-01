@@ -1,10 +1,8 @@
 package controller;
 
 import model.Product;
-import repository.ProductRepository;
-import repository.impl.ProductRepositoryImpl;
-import service.Service;
-import service.impl.ProductServiceImpl;
+import service.IService;
+import service.impl.ProductIServiceImpl;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -14,7 +12,7 @@ import java.util.List;
 
 @WebServlet(name = "ProductServlet", value = "/Product")
 public class ProductServlet extends HttpServlet {
-    private Service productService = new ProductServiceImpl();
+    private IService productIService = new ProductIServiceImpl();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -77,7 +75,7 @@ public class ProductServlet extends HttpServlet {
 
     private void detailProduct(HttpServletRequest request, HttpServletResponse response) {
         int productId = Integer.parseInt(request.getParameter("id"));
-       Product product = productService.findById(productId);
+       Product product = productIService.findById(productId);
        request.setAttribute("product",product);
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("/view/crud/detail.jsp");
         try {
@@ -92,7 +90,7 @@ public class ProductServlet extends HttpServlet {
 
     private void showSearchByName(HttpServletRequest request, HttpServletResponse response) {
         String productName = request.getParameter("productName");
-        List<Product> productList = productService.searchByName(productName);
+        List<Product> productList = productIService.searchByName(productName);
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("view/list/product.jsp");
         request.setAttribute("list", productList);
         try {
@@ -108,7 +106,7 @@ public class ProductServlet extends HttpServlet {
 
     private void showDeleteForm(HttpServletRequest request, HttpServletResponse response) {
         int productId = Integer.parseInt(request.getParameter("id"));
-        Product product = productService.findById(productId);
+        Product product = productIService.findById(productId);
         request.setAttribute("product", product);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/view/crud/delete-product.jsp");
         try {
@@ -122,7 +120,7 @@ public class ProductServlet extends HttpServlet {
 
     private void showEditForm(HttpServletRequest request, HttpServletResponse response) {
         int productId = Integer.parseInt(request.getParameter("id"));
-        Product product = productService.findById(productId);
+        Product product = productIService.findById(productId);
         request.setAttribute("product", product);
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("/view/crud/edit-product.jsp");
         try {
@@ -154,7 +152,7 @@ public class ProductServlet extends HttpServlet {
         double productPrice = Double.parseDouble(request.getParameter("productPrice"));
         String productDescription = request.getParameter("productDescription");
         String producerName = request.getParameter("producerName");
-        productService.addProduct(new Product(productId, productName, productPrice, productDescription, producerName));
+        productIService.addProduct(new Product(productId, productName, productPrice, productDescription, producerName));
 
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("view/crud/create-product.jsp");
         request.setAttribute("message", "Add success " + productName);
@@ -169,7 +167,7 @@ public class ProductServlet extends HttpServlet {
 
 
     private void showListProduct(HttpServletRequest request, HttpServletResponse response) {
-        List<Product> productList = productService.all();
+        List<Product> productList = productIService.all();
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("view/list/product.jsp");
         request.setAttribute("list", productList);
         try {
@@ -186,7 +184,7 @@ public class ProductServlet extends HttpServlet {
     private void searchByName(HttpServletRequest request, HttpServletResponse response) {
         RequestDispatcher requestDispatcher;
         String productName = request.getParameter("productName");
-        List<Product> productList = productService.searchByName(productName);
+        List<Product> productList = productIService.searchByName(productName);
         if (productList.isEmpty()){
             requestDispatcher = request.getRequestDispatcher("view/crud/404.jsp");
         }else {
@@ -206,7 +204,7 @@ public class ProductServlet extends HttpServlet {
 
     private void deleteProduct(HttpServletRequest request, HttpServletResponse response) {
         int productId = Integer.parseInt(request.getParameter("id"));
-        productService.deleteProduct(productId);
+        productIService.deleteProduct(productId);
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("view/crud/delete-product.jsp");
         request.setAttribute("message", "Delete success " + productId);
         try {
@@ -216,10 +214,7 @@ public class ProductServlet extends HttpServlet {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
     }
-    
 
     private void editProduct(HttpServletRequest request, HttpServletResponse response) {
         int productId = Integer.parseInt(request.getParameter("id"));
@@ -228,8 +223,16 @@ public class ProductServlet extends HttpServlet {
         String productDescription = request.getParameter("description");
         String producerName = request.getParameter("producer");
         Product product = new Product(productId, productName, productPrice, productDescription, producerName);
-        productService.updateProduct(productId, product);
-       showListProduct(request,response);
+        productIService.updateProduct(productId, product);
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("view/crud/edit-product.jsp");
+        request.setAttribute("message", "edit success");
+        try {
+            requestDispatcher.forward(request, response);
+        } catch (ServletException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
     }
 }

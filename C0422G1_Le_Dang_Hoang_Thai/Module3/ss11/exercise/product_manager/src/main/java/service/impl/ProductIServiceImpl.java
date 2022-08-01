@@ -3,11 +3,11 @@ package service.impl;
 import model.Product;
 import repository.ProductRepository;
 import repository.impl.ProductRepositoryImpl;
-import service.Service;
+import service.IService;
 
 import java.util.List;
 
-public class ProductServiceImpl implements Service {
+public class ProductIServiceImpl implements IService {
     private ProductRepository productRepository = new ProductRepositoryImpl() ;
 
 

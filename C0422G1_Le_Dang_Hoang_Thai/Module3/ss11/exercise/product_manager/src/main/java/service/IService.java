@@ -4,7 +4,7 @@ import model.Product;
 
 import java.util.List;
 
-public interface Service {
+public interface IService {
     List<Product> all();
 
     void addProduct(Product product);
