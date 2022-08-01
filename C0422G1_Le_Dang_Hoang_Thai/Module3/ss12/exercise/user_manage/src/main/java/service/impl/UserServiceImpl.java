@@ -21,7 +21,8 @@ public class UserServiceImpl implements IService {
 
     @Override
     public boolean update(User user) {
-        return false;
+
+        return serviceRepository.update(user);
     }
 
     @Override
@@ -31,7 +32,8 @@ public class UserServiceImpl implements IService {
 
     @Override
     public User findById(int id) {
-        return null;
+
+       return serviceRepository.findById(id);
     }
 
     @Override

@@ -12,7 +12,7 @@ import java.util.List;
 public class IUserServiceRepositoryImpl implements IUserServiceRepository {
     private final String FIND_BY_ID = "select * from users where id =?";
     private final String SELECT_ALL = "select *from users ";
-    private final String SELECT_ALL_Sort = "select *from users order by name";
+    private final String SELECT_SORT = "select *from users order by name";
     private final String INSERT_INTO = "insert into users(id,name,email,country)" +
             "values(?,?,?,?)";
     private final String DELETE_USER = "delete from users where id = ?";
@@ -52,10 +52,11 @@ public class IUserServiceRepositoryImpl implements IUserServiceRepository {
         PreparedStatement preparedStatement;
         try {
             preparedStatement = connection.prepareStatement(INSERT_INTO);
-            preparedStatement.setInt(1, user.getId());
-            preparedStatement.setString(2, user.getName());
-            preparedStatement.setString(3, user.getEmail());
-            preparedStatement.setString(4, user.getCountry());
+
+            preparedStatement.setString(1, user.getName());
+            preparedStatement.setString(2, user.getEmail());
+            preparedStatement.setString(3, user.getCountry());
+            preparedStatement.setInt(4, user.getId());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -65,6 +66,20 @@ public class IUserServiceRepositoryImpl implements IUserServiceRepository {
 
     @Override
     public boolean update(User user) {
+        Connection connection = UserRepository.getConnectDB();
+        PreparedStatement preparedStatement;
+        try {
+            preparedStatement = connection.prepareStatement(UPDATE_USER);
+            preparedStatement.setInt(1,user.getId());
+            preparedStatement.setString(2,user.getName());
+            preparedStatement.setString(3,user.getEmail());
+            preparedStatement.setString(4,user.getCountry());
+            boolean update = preparedStatement.executeUpdate()>0;
+            return update;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
         return false;
 
     }
@@ -76,8 +91,8 @@ public class IUserServiceRepositoryImpl implements IUserServiceRepository {
         try {
             preparedStatement = connection.prepareStatement(DELETE_USER);
             preparedStatement.setInt(1,id);
-            boolean rowDelete = preparedStatement.executeUpdate()>0;
-            return rowDelete;
+            boolean Delete = preparedStatement.executeUpdate()>0;
+            return Delete;
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -106,6 +121,7 @@ public class IUserServiceRepositoryImpl implements IUserServiceRepository {
         }
         return user;
     }
+
         @Override
         public List<User> findByCountry (String country){
             return null;

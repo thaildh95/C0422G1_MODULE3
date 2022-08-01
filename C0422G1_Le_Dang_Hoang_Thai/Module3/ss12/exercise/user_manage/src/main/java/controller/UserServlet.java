@@ -48,6 +48,7 @@ public class UserServlet extends HttpServlet {
                 addUser(request, response);
                 break;
             case "update":
+                updateUser(request,response);
                 break;
             case "delete":
                 deleteUser(request, response);
@@ -56,6 +57,23 @@ public class UserServlet extends HttpServlet {
                 break;
             case "sort":
                 break;
+        }
+    }
+
+    private void updateUser(HttpServletRequest request, HttpServletResponse response) {
+        int id = Integer.parseInt(request.getParameter("id"));
+        String name = request.getParameter("name");
+        String email = request.getParameter("email");
+        String country = request.getParameter("country");
+        User users = new User(id,name,email,country);
+        service.update(users);
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("view/crud/update.jsp");
+        try {
+            requestDispatcher.forward(request, response);
+        } catch (ServletException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
