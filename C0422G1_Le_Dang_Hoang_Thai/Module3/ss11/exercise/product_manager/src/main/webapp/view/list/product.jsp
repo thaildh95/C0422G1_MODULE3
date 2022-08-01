@@ -12,8 +12,8 @@
 <html>
 <head>
     <title>Title</title>
-    <link rel="stylesheet" href="view/bootstrap-5.0.2-dist/css/bootstrap.min.css">
-
+<%--    <link rel="stylesheet" href="view/bootstrap-5.0.2-dist/css/bootstrap.min.css">--%>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
 <style>
 
@@ -49,7 +49,7 @@
         <th>name</th>
         <th>prices</th>
         <th>description</th>
-        <th colspan="4">producer</th>
+        <th colspan="5">producer</th>
     </tr>
     <c:forEach var="product" items="${list}">
         <tr>
@@ -63,7 +63,6 @@
                 <button class="btn btn-primary" name="action" value="submit">edit</button>
             </a>
             </td>
-
             </a>
             </td>
             <td><a href="/Product?action=delete&id=${product.productId}">
@@ -75,39 +74,38 @@
                 <button name="action" value="detail" class="btn btn-primary">detail</button>
             </a>
             </td>
-            <div>
-<%--            <td>--%>
-<%--                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal-${product.productId}">--%>
-<%--                    Delete--%>
-<%--                </button>--%>
-
-<%--                <!-- Modal -->--%>
-<%--                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">--%>
-<%--                    <div class="modal-dialog">--%>
-<%--                        <div class="modal-content">--%>
-<%--                            <div class="modal-header">--%>
-<%--                                <h5 class="modal-title" id="exampleModalLabel">Warning</h5>--%>
-<%--                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>--%>
-<%--                            </div>--%>
-<%--                            <div class="modal-body">--%>
-<%--                                    Do you want to delete this product : ${product.productName}--%>
-<%--                            </div>--%>
-<%--                            <div class="modal-footer">--%>
-<%--                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Yes</button>--%>
-<%--                                <button type="button" class="btn btn-primary">No</button>--%>
-<%--                            </div>--%>
-<%--                        </div>--%>
-<%--                    </div>--%>
-<%--                </div>--%>
-<%--            </td>--%>
-           </div>
+            <td>
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal-${product.productId}">
+                    Launch demo modal
+                </button>
+            </td>
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal-${product.productId}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            ...
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <a href="/Product?action=delete&id=${product.productId}">
+                                <button class="btn btn-primary">delete</button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </tr>
     </c:forEach>
-    <!-- Button trigger modal -->
-
 </table>
-<script src="../bootstrap-5.0.2-dist/jquery/jquery-3.6.0.min.js"></script>
-<script src="../bootstrap-5.0.2-dist/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
 </body>
 
 </html>

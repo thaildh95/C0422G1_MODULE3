@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../bootstrap-5.0.2-dist/css/bootstrap.min.css">
+    <script src="../bootstrap-5.0.2-dist/jquery/jquery-3.6.0.min.js"></script>
+    <script src="../bootstrap-5.0.2-dist/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+
+<table class="table table-success table-striped">
+    <tr>
+        <th>id</th>
+        <th>name</th>
+        <th>prices</th>
+        <th>description</th>
+        <th>producer</th>
+    </tr>
+
+    <tr>
+        <td>${product.productId}</td>
+        <td>${product.productName}</td>
+        <td>${product.productPrice}</td>
+        <td>${product.productDescription}</td>
+        <td>${product.producerName}</td>
+        <td><a href="/Product?action=edit&id=${product.productId}">
+            <button>edit</button>
+        </a></td>
+        <td><a href="/Product?action=delete&id=${product.productId}">
+            <button>delete</button>
+        </a></td>
+    </tr>
+</table>
+
+</body>
+</html>

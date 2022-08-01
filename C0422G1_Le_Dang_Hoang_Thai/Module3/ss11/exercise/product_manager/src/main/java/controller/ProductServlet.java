@@ -205,12 +205,9 @@ public class ProductServlet extends HttpServlet {
     private void deleteProduct(HttpServletRequest request, HttpServletResponse response) {
         int productId = Integer.parseInt(request.getParameter("id"));
         productIService.deleteProduct(productId);
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("view/crud/delete-product.jsp");
-        request.setAttribute("message", "Delete success " + productId);
+        showListProduct(request,response);
         try {
-            requestDispatcher.forward(request, response);
-        } catch (ServletException e) {
-            e.printStackTrace();
+         response.sendRedirect("/Product");
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -30,9 +30,9 @@
     <fieldset style="box-shadow: 1px 2px 3px 3px skyblue;background: bisque">
         <legend>Product Info</legend>
         <form action="/Product" method="post" style="width: 400px">
-            <div class="mb-3" style="padding-top: 10px" disabled>
+            <div class="mb-3" style="padding-top: 10px" >
                 <label for="id" class="form-label" >Product ID</label>
-                <input required type="text" class="form-control" id="Id" aria-describedby="emailHelp" name="id">
+                <input required type="text"  class="form-control" id="Id" aria-describedby="emailHelp" name="id" value="${product.productId}">
             </div>
             <div class="mb-3" >
                 <label for="name" class="form-label">Product Name</label>

@@ -37,8 +37,8 @@ public class ProductRepositoryImpl implements ProductRepository {
     @Override
     public List<Product> searchByName(String productName) {
         List<Product> products = new ArrayList<>();
-        for (Product p :productList){
-            if (p.getProductName().toLowerCase().contains(productName.toLowerCase())){
+        for (Product p : productList) {
+            if (p.getProductName().toLowerCase().contains(productName.toLowerCase())) {
                 products.add(p);
             }
         }
@@ -53,12 +53,12 @@ public class ProductRepositoryImpl implements ProductRepository {
     @Override
     public void update(int id, Product product) {
         for (int i = 0; i < productList.size(); i++) {
-            if (productList.get(i).getProductId()==id){
-               productList.get(i).setProductId(product.getProductId());
-               productList.get(i).setProductName(product.getProductName());
-               productList.get(i).setProductPrice(product.getProductPrice());
-               productList.get(i).setProductDescription(product.getProductDescription());
-               productList.get(i).setProducerName(product.getProducerName());
+            if (productList.get(i).getProductId() == id) {
+                productList.get(i).setProductId(product.getProductId());
+                productList.get(i).setProductName(product.getProductName());
+                productList.get(i).setProductPrice(product.getProductPrice());
+                productList.get(i).setProductDescription(product.getProductDescription());
+                productList.get(i).setProducerName(product.getProducerName());
                 break;
             }
         }
@@ -68,7 +68,7 @@ public class ProductRepositoryImpl implements ProductRepository {
     @Override
     public void delete(int id) {
         for (int i = 0; i < productList.size(); i++) {
-            if (findById(id) == productList.get(i)){
+            if (findById(id) == productList.get(i)) {
                 productList.remove(i);
             }
         }

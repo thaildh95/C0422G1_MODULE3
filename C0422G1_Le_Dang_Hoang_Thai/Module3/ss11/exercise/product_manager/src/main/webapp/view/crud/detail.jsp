@@ -11,7 +11,7 @@
     <title>Title</title>
 </head>
 <body>
-<form  method="post">
+<form  method="get">
   <fieldset style="width: 400px;margin: auto;text-align: center;box-shadow: 0px 1px 2px 3px #b6d4fe">
     <legend style="text-align: center">Thông tin sản phẩm</legend>
       <table>
