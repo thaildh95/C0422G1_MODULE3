@@ -8,6 +8,7 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet(name = "UserServlet", urlPatterns = {"/user"})
@@ -54,11 +55,28 @@ public class UserServlet extends HttpServlet {
                 deleteUser(request, response);
                 break;
             case "search":
+                searchByCountry(request,response);
+
                 break;
             case "sort":
                 break;
         }
     }
+
+    private void searchByCountry(HttpServletRequest request, HttpServletResponse response) {
+        String country = request.getParameter("country");
+        List<User> userList =  service.findByCountry(country);
+        request.setAttribute("list",userList);
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("view/list.jsp");
+        try {
+            requestDispatcher.forward(request, response);
+        } catch (ServletException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 
     private void updateUser(HttpServletRequest request, HttpServletResponse response) {
         int id = Integer.parseInt(request.getParameter("id"));

@@ -24,7 +24,7 @@
         </div>
         <form class="d-flex" action="/user?action=search" method="post">
 
-            <input type="text" name="username" placeholder="Search">
+            <input type="text" name="country" placeholder="Search">
             <button type="submit" class="btn btn-primary" name="action" value="search">Submit</button>
 
         </form>

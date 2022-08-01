@@ -32,7 +32,7 @@
         <form action="/user?action=update" method="post" style="width: 400px">
             <div class="mb-3" style="padding-top: 10px" >
                 <label for="id" class="form-label" >User ID</label>
-                <input required type="text"  class="form-control" id="id" aria-describedby="emailHelp" name="id" value="${user.id}">
+                <input required type="hidden"  class="form-control" id="id" aria-describedby="emailHelp" name="id" value="${user.id}">
             </div>
             <div class="mb-3" >
                 <label for="name" class="form-label">User Name</label>

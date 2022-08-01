@@ -10,17 +10,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class IUserServiceRepositoryImpl implements IUserServiceRepository {
-    private final String FIND_BY_ID = "select * from users where id =?";
-    private final String SELECT_ALL = "select *from users ";
+    private final String FIND_BY_ID = "select * from users where id =?;";
+    private final String SELECT_ALL = "select *from users;";
     private final String SELECT_SORT = "select *from users order by name";
-    private final String INSERT_INTO = "insert into users(id,name,email,country)" +
+    private final String INSERT_INTO = "insert into users(id,name,email,country);" +
             "values(?,?,?,?)";
-    private final String DELETE_USER = "delete from users where id = ?";
-    private final String UPDATE_USER = "update users set name =?,email =?,country =? where id = ?";
+    private final String DELETE_USER = "delete from users where id = ?;";
+    private final String UPDATE_USER = "update users set name =?,email =?,country =? where id = ?;";
 
-    private final String FIND_BY_COUNTRY = "select *" +
-            "from users " +
-            "where country like concat('%',?,'%')";
+    private final String FIND_BY_COUNTRY = "select * from users  where country like" +"?"+";";
 
     @Override
     public List<User> findAll() {
@@ -52,11 +50,10 @@ public class IUserServiceRepositoryImpl implements IUserServiceRepository {
         PreparedStatement preparedStatement;
         try {
             preparedStatement = connection.prepareStatement(INSERT_INTO);
-
-            preparedStatement.setString(1, user.getName());
-            preparedStatement.setString(2, user.getEmail());
-            preparedStatement.setString(3, user.getCountry());
-            preparedStatement.setInt(4, user.getId());
+            preparedStatement.setInt(1, user.getId());
+            preparedStatement.setString(2, user.getName());
+            preparedStatement.setString(3, user.getEmail());
+            preparedStatement.setString(4, user.getCountry());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -70,10 +67,11 @@ public class IUserServiceRepositoryImpl implements IUserServiceRepository {
         PreparedStatement preparedStatement;
         try {
             preparedStatement = connection.prepareStatement(UPDATE_USER);
-            preparedStatement.setInt(1,user.getId());
-            preparedStatement.setString(2,user.getName());
-            preparedStatement.setString(3,user.getEmail());
-            preparedStatement.setString(4,user.getCountry());
+
+            preparedStatement.setString(1,user.getName());
+            preparedStatement.setString(2,user.getEmail());
+            preparedStatement.setString(3,user.getCountry());
+            preparedStatement.setInt(4,user.getId());
             boolean update = preparedStatement.executeUpdate()>0;
             return update;
         } catch (SQLException e) {
@@ -124,7 +122,24 @@ public class IUserServiceRepositoryImpl implements IUserServiceRepository {
 
         @Override
         public List<User> findByCountry (String country){
-            return null;
+            Connection connection = UserRepository.getConnectDB();
+            List<User> userList = new ArrayList<>();
+            PreparedStatement preparedStatement;
+            ResultSet resultSet;
+            try {
+                preparedStatement = connection.prepareStatement(FIND_BY_COUNTRY);
+                resultSet = preparedStatement.executeQuery();
+                while (resultSet.next()){
+                    int id = resultSet.getInt("id");
+                    String name = resultSet.getString("name");
+                    String email = resultSet.getString("email");
+                    country = resultSet.getString("country");
+                    userList.add(new User(id,name,email,country));
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }return userList;
+
         }
 
         @Override

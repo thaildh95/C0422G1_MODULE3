@@ -38,11 +38,9 @@ public class UserServiceImpl implements IService {
 
     @Override
     public List<User> findByCountry(String country) {
-        return null;
+
+        return serviceRepository.findByCountry(country);
     }
 
-    @Override
-    public List<User> findAllSort() {
-        return null;
-    }
+
 }
