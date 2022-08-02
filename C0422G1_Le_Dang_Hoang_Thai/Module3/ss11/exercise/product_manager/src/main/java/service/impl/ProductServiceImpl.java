@@ -1,13 +1,13 @@
 package service.impl;
 
 import model.Product;
-import repository.ProductRepository;
+import repository.IProductRepository;
 import repository.impl.ProductRepositoryImpl;
 import service.IService;
 
 import java.util.List;
 
-public class ProductIServiceImpl implements IService {
+public class ProductServiceImpl implements IService {
     private ProductRepository productRepository = new ProductRepositoryImpl() ;
 
 
