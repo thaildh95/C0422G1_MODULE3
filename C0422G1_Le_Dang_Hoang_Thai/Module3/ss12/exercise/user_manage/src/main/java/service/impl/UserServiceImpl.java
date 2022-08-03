@@ -1,14 +1,13 @@
 package service.impl;
 
 import model.User;
-import repository.IUserServiceRepository;
-import repository.impl.IUserServiceRepositoryImpl;
+import repository.impl.IUserServiceRepository;
 import service.IService;
 
 import java.util.List;
 
-public class UserServiceImpl implements IService {
-    IUserServiceRepository serviceRepository = new IUserServiceRepositoryImpl();
+public class UserService implements IService {
+    repository.IUserServiceRepository serviceRepository = new IUserServiceRepository();
     @Override
     public List<User> findAll() {
         return serviceRepository.findAll();

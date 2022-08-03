@@ -9,11 +9,11 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class IUserServiceRepositoryImpl implements IUserServiceRepository {
+public class IUserServiceRepository implements repository.IUserServiceRepository {
     private final String FIND_BY_ID = "select * from users where id =?;";
     private final String SELECT_ALL = "select *from users;";
     private final String SELECT_SORT = "select *from users order by name";
-    private final String INSERT_INTO = "insert into users(id,name,email,country);" +
+    private final String INSERT_INTO = "insert into users(id,name,email,country)" +
             "values(?,?,?,?)";
     private final String DELETE_USER = "delete from users where id = ?;";
     private final String UPDATE_USER = "update users set name =?,email =?,country =? where id = ?;";
@@ -128,6 +128,7 @@ public class IUserServiceRepositoryImpl implements IUserServiceRepository {
             ResultSet resultSet;
             try {
                 preparedStatement = connection.prepareStatement(FIND_BY_COUNTRY);
+                preparedStatement.setString(1,"%"+country+"%");
                 resultSet = preparedStatement.executeQuery();
                 while (resultSet.next()){
                     int id = resultSet.getInt("id");
