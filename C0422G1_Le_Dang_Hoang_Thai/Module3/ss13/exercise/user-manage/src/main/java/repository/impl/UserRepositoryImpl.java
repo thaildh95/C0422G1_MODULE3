@@ -48,4 +48,14 @@ public class UserRepositoryImpl implements IUserRepository {
     public boolean updateUser(User user) throws SQLException {
         return false;
     }
+
+    @Override
+    public void addUserWithTransaction(User user, int[] permissions) {
+
+    }
+
+    @Override
+    public void insertUpdateWithTransaction() {
+
+    }
 }

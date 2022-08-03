@@ -34,4 +34,14 @@ public class UserImpl implements IUser {
     public boolean updateUser(User user) throws SQLException {
         return false;
     }
+
+    @Override
+    public void addUserWithTransaction(User user, int[] permissions) {
+
+    }
+
+    @Override
+    public void insertUpdateWithTransaction() {
+
+    }
 }
