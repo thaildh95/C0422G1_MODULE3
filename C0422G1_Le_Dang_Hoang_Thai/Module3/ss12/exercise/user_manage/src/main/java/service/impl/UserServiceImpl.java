@@ -1,13 +1,13 @@
 package service.impl;
 
 import model.User;
-import repository.impl.IUserServiceRepository;
+import repository.impl.IUserServiceRepositoryImpl;
 import service.IService;
 
 import java.util.List;
 
-public class UserService implements IService {
-    repository.IUserServiceRepository serviceRepository = new IUserServiceRepository();
+public class UserServiceImpl implements IService {
+    repository.IUserServiceRepository serviceRepository = new IUserServiceRepositoryImpl();
     @Override
     public List<User> findAll() {
         return serviceRepository.findAll();
@@ -39,6 +39,11 @@ public class UserService implements IService {
     public List<User> findByCountry(String country) {
 
         return serviceRepository.findByCountry(country);
+    }
+
+    @Override
+    public boolean addUserWithTransaction(User user) {
+   return  serviceRepository.addUserWithTransaction(user);
     }
 
 

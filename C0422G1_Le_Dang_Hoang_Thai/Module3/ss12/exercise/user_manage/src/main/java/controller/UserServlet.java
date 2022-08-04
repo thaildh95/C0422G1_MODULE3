@@ -8,7 +8,6 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet(name = "UserServlet", urlPatterns = {"/user"})
@@ -51,12 +50,12 @@ public class UserServlet extends HttpServlet {
             case "update":
                 updateUser(request,response);
                 break;
-            case "delete":
-                deleteUser(request, response);
-                break;
+
             case "search":
                 searchByCountry(request,response);
-
+                break;
+            case "delete":
+                deleteUser(request, response);
                 break;
             case "sort":
                 break;
@@ -101,7 +100,7 @@ public class UserServlet extends HttpServlet {
         String email = request.getParameter("email");
         String country = request.getParameter("country");
         User user = new User(id, name, email, country);
-        service.add(user);
+        service.addUserWithTransaction(user);
         request.setAttribute("mesage", "add success");
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("view/crud/add.jsp");
         showFormAdd(request, response);

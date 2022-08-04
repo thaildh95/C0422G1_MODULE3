@@ -32,19 +32,19 @@
         <form style="width: 400px; padding-top: 10px" action="/user"  method="post">
             <div class="mb-3" style="padding-top: 10px">
                 <label for="id" class="form-label">User ID</label>
-                <input type="text" class="form-control" id="id" name="id" aria-describedby="emailHelp">
+                <input required type="text" class="form-control" id="id" name="id" aria-describedby="emailHelp">
             </div>
             <div class="mb-3" style="padding-top: 10px">
                 <label for="name" class="form-label">User Name</label>
-                <input type="text" class="form-control" id="name" name="name" aria-describedby="emailHelp">
+                <input required type="text" class="form-control" id="name" name="name" aria-describedby="emailHelp">
             </div>
             <div class="mb-3" style="padding-top: 10px">
                 <label for="email" class="form-label">User Email</label>
-                <input type="text" class="form-control" id="email" name="email" aria-describedby="emailHelp">
+                <input required type="text" class="form-control" id="email" name="email" aria-describedby="emailHelp">
             </div>
             <div class="mb-3" style="padding-top: 10px">
                 <label for="country" class="form-label">User Country</label>
-                <input type="text" class="form-control" id="country" name="country" aria-describedby="emailHelp">
+                <input required type="text" class="form-control" id="country" name="country" aria-describedby="emailHelp">
             </div>
             <div class="mb-3" style="padding-top: 10px">
                 <button  style="padding-top: 10px;margin-left: 200px;margin-top: 10px" type="submit" class="btn btn-primary" name="action" value="add" >Submit</button>

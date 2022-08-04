@@ -12,4 +12,7 @@ public interface IUserServiceRepository {
     User findById(int id);
     List<User> findByCountry(String country);
     List<User> findAllSort();
+    boolean addUserWithTransaction(User user);
+
+
 }

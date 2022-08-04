@@ -9,26 +9,32 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class IUserServiceRepository implements repository.IUserServiceRepository {
+public class IUserServiceRepositoryImpl implements repository.IUserServiceRepository {
     private final String FIND_BY_ID = "select * from users where id =?;";
     private final String SELECT_ALL = "select *from users;";
     private final String SELECT_SORT = "select *from users order by name";
     private final String INSERT_INTO = "insert into users(id,name,email,country)" +
             "values(?,?,?,?)";
-    private final String DELETE_USER = "delete from users where id = ?;";
+    //    private final String DELETE_USER = "delete from users where id = ?;";
     private final String UPDATE_USER = "update users set name =?,email =?,country =? where id = ?;";
 
-    private final String FIND_BY_COUNTRY = "select * from users  where country like" +"?"+";";
+    private final String FIND_BY_COUNTRY = "select * from users  where country like" + "?" + ";";
+    private final String DELETE_USER = "call delete_users( ?);";
+    private final String DISPLAY = "call display_user();";
+    private final String UPDATE_USER_V2 = "call update_user(?,?,?,?);";
+    private final String INSERT_TO_V2 = "call insert_user(?,?,?);";
+
 
     @Override
     public List<User> findAll() {
         List<User> userList = new ArrayList<>();
         Connection connection = UserRepository.getConnectDB();
-        PreparedStatement preparedStatement;
+//        PreparedStatement preparedStatement;
+        CallableStatement callableStatement;
         ResultSet resultSet;
         try {
-            preparedStatement = connection.prepareStatement(SELECT_ALL);
-            resultSet = preparedStatement.executeQuery();
+            callableStatement = connection.prepareCall(DISPLAY);
+            resultSet = callableStatement.executeQuery();
             while (resultSet.next()) {
                 int id = resultSet.getInt("id");
                 String name = resultSet.getString("name");
@@ -64,15 +70,16 @@ public class IUserServiceRepository implements repository.IUserServiceRepository
     @Override
     public boolean update(User user) {
         Connection connection = UserRepository.getConnectDB();
-        PreparedStatement preparedStatement;
+//        PreparedStatement preparedStatement;
+        CallableStatement callableStatement;
         try {
-            preparedStatement = connection.prepareStatement(UPDATE_USER);
+            callableStatement = connection.prepareCall(UPDATE_USER_V2);
 
-            preparedStatement.setString(1,user.getName());
-            preparedStatement.setString(2,user.getEmail());
-            preparedStatement.setString(3,user.getCountry());
-            preparedStatement.setInt(4,user.getId());
-            boolean update = preparedStatement.executeUpdate()>0;
+            callableStatement.setString(1, user.getName());
+            callableStatement.setString(2, user.getEmail());
+            callableStatement.setString(3, user.getCountry());
+            callableStatement.setInt(4, user.getId());
+            boolean update = callableStatement.executeUpdate() > 0;
             return update;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -85,11 +92,13 @@ public class IUserServiceRepository implements repository.IUserServiceRepository
     @Override
     public boolean delete(int id) {
         Connection connection = UserRepository.getConnectDB();
-       PreparedStatement preparedStatement;
+//        PreparedStatement preparedStatement;
+        CallableStatement callableStatement;
         try {
-            preparedStatement = connection.prepareStatement(DELETE_USER);
-            preparedStatement.setInt(1,id);
-            boolean Delete = preparedStatement.executeUpdate()>0;
+            callableStatement = connection.prepareCall(DELETE_USER);
+//            preparedStatement = connection.prepareStatement(DELETE_USER);
+            callableStatement.setInt(1, id);
+            boolean Delete = callableStatement.executeUpdate() > 0;
             return Delete;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -120,31 +129,61 @@ public class IUserServiceRepository implements repository.IUserServiceRepository
         return user;
     }
 
-        @Override
-        public List<User> findByCountry (String country){
-            Connection connection = UserRepository.getConnectDB();
-            List<User> userList = new ArrayList<>();
-            PreparedStatement preparedStatement;
-            ResultSet resultSet;
-            try {
-                preparedStatement = connection.prepareStatement(FIND_BY_COUNTRY);
-                preparedStatement.setString(1,"%"+country+"%");
-                resultSet = preparedStatement.executeQuery();
-                while (resultSet.next()){
-                    int id = resultSet.getInt("id");
-                    String name = resultSet.getString("name");
-                    String email = resultSet.getString("email");
-                    country = resultSet.getString("country");
-                    userList.add(new User(id,name,email,country));
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }return userList;
-
+    @Override
+    public List<User> findByCountry(String country) {
+        Connection connection = UserRepository.getConnectDB();
+        List<User> userList = new ArrayList<>();
+        PreparedStatement preparedStatement;
+        ResultSet resultSet;
+        try {
+            preparedStatement = connection.prepareStatement(FIND_BY_COUNTRY);
+            preparedStatement.setString(1, "%" + country + "%");
+            resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                String name = resultSet.getString("name");
+                String email = resultSet.getString("email");
+                country = resultSet.getString("country");
+                userList.add(new User(id, name, email, country));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
+        return userList;
 
-        @Override
-        public List<User> findAllSort () {
-            return null;
-        }
     }
+
+    @Override
+    public List<User> findAllSort() {
+        return null;
+    }
+
+    @Override
+    public boolean addUserWithTransaction(User user) {
+        Connection connection = UserRepository.getConnectDB();
+        CallableStatement callableStatement;
+        ResultSet resultSet = null;
+        try {
+            connection.setAutoCommit(false);
+            callableStatement = connection.prepareCall(INSERT_TO_V2);
+            callableStatement.setString(2, user.getName());
+            callableStatement.setString(3, user.getEmail());
+            callableStatement.setString(4, user.getCountry());
+            int affectRow = callableStatement.executeUpdate();
+            if (affectRow == 2) {
+                connection.commit();
+            } else
+                connection.rollback();
+        } catch (SQLException e) {
+            try {
+                connection.rollback();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+            e.printStackTrace();
+        }
+        return false;
+
+    }
+
+}

@@ -12,4 +12,8 @@ public interface IService {
     User findById(int id);
     List<User> findByCountry(String country);
 
+
+    boolean addUserWithTransaction(User user);
+
+
 }

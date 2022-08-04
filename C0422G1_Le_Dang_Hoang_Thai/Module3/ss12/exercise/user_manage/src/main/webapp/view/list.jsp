@@ -46,15 +46,50 @@
             <td>${user.email}</td>
             <td>${user.country}</td>
             <td><a href="/user?action=update&id=${user.id}">Edit</a></td>
-            <td><a href="/user?action=delete&id=${user.id}">Delete</a></td>
+
+
+            <td>
+                <!-- Button trigger modal -->
+                <button onclick="deleteById('${user.id}','${user.name}')" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    Delete
+                </button>
+                <!-- Modal -->
+            </td>
+
         </tr>
     </c:forEach>
-
+    <form action="/user?action=delete" method="post">
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="text"  name="id" id="deleteId" value="id">
+                   <span> do you want to delete this user?</span> <span id="deleteName"></span>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-danger"> Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    </form>
 </table>
 
+<script>
+    function deleteById(id,name){
+            document.getElementById("deleteId").value = id;
+            document.getElementById("deleteName").innerText = name;
 
+    }
 
-<script src="../bootstrap-5.0.2-dist/jquery/jquery-3.6.0.min.js"></script>
-<script src="../bootstrap-5.0.2-dist/js/bootstrap.min.js"></script>
+</script>
+
+<script src="/view/bootstrap-5.0.2-dist/jquery/jquery-3.6.0.min.js"></script>
+<script src="/view/bootstrap-5.0.2-dist/js/bootstrap.min.js"></script>
 </body>
 </html>
