@@ -69,7 +69,7 @@
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                         <li><a class="dropdown-item" href="/furama?action=displayServiceList">Danh sách dịch vụ</a></li>
-                        <li><a class="dropdown-item" href="#">Thêm mới dich vụ</a></li>
+                        <li><a class="dropdown-item" href="/furama?action=displayAddService">Thêm mới dich vụ</a></li>
                         <li><a class="dropdown-item" href="#">Chỉnh sửa dịch vụ</a></li>
                         <%--                <li><a class="dropdown-item" href="#">Xóa dịch vụ</a></li>--%>
                     </ul>

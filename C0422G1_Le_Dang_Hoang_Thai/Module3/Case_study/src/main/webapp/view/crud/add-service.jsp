@@ -138,27 +138,27 @@
 
         <div class="col-md-12">
             <label for="name" class="form-label">Tên dịch vụ</label>
-            <input type="text" class="form-control" id="name" name="name">
+            <input type="text" class="form-control" id="name" name="name" placeholder="Họ và tên" required>
         </div>
         <div class="col-md-12">
             <label for="area" class="form-label">Diện tích sử dụng</label>
-            <input type="text" class="form-control" id="area" name="area">
+            <input type="text" class="form-control" id="area" name="area" placeholder="diện tích sử dụng" required>
         </div>
         <div class="col-md-12">
             <label for="cost" class="form-label">Chi phí thuê</label>
-            <input type="text" class="form-control" id="cost"  name="cost" >
+            <input type="text" class="form-control" id="cost"  name="cost" placeholder="chi phí thuê" required>
         </div>
         <div class="col-md-12">
             <label for="inputAddress2" class="form-label">Số lượng người tối đa </label>
-            <input type="text" class="form-control" id="inputAddress2"  name="max_people" >
+            <input type="text" class="form-control" id="inputAddress2"  name="max_people" placeholder="số người tối đa" required >
         </div>
         <div class="col-md-12">
             <label for="inputCity" class="form-label">Kiểu thuê</label>
-            <input type="text" class="form-control" id="inputCity" name="rent_type_id">
+            <input type="text" class="form-control" id="inputCity" name="rent_type" placeholder="kiểu thuê" required>
         </div>
         <div class="col-md-12 " id="s1" style="display: none">
-            <label for="standard_room" class="form-label">Tiêu chuẩn phòng </label>
-            <input type="text" class="form-control" id="standard_room" name="standard_room">
+            <label for="room_standard" class="form-label">Tiêu chuẩn phòng </label>
+            <input type="text" class="form-control" id="room_standard" name="room_standard" placeholder="tiêu chuẩn phòng" required>
         </div>
 
         <div class="col-md-12 " id="s2" style="display: none">
