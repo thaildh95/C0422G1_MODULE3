@@ -128,8 +128,8 @@
     <form class="row g-3" action="" method="post">
         <div class="col-md-12">
             <label class="form-label">Loại dịch vụ</label>
-            <select name=""  class="form-select" >
-                <option value="None" >Chọn loại dịch vụ</option>
+            <select name=""  class="form-select" onchange="showForm(this.value)">
+<%--                <option value="None" >Chọn loại dịch vụ</option>--%>
                 <option value="Villa" >Villa</option>
                 <option value="House" >House</option>
                 <option value="Room" >Room</option>
@@ -187,6 +187,43 @@
     </form>
 </div>
 
+<script>
+    function showForm(value){
+
+        switch (value){
+            // case "None":
+            //     document.getElementById("s1").style.display = "none";
+            //     document.getElementById("s2").style.display = "none";
+            //     document.getElementById("s3").style.display = "none";
+            //     document.getElementById("s4").style.display = "none";
+            //     document.getElementById("s5").style.display = "none";
+            //     break;
+            case "Villa":
+                document.getElementById("s1").style.display = "block";
+                document.getElementById("s2").style.display = "block";
+                document.getElementById("s3").style.display = "block";
+                document.getElementById("s4").style.display = "block";
+                document.getElementById("s5").style.display = "none";
+                break;
+            case "House":
+                document.getElementById("s1").style.display = "block";
+                document.getElementById("s2").style.display = "block";
+                document.getElementById("s3").style.display = "block";
+                document.getElementById("s4").style.display = "none";
+                document.getElementById("s5").style.display = "none";
+                break;
+
+            case "Room":
+                document.getElementById("s1").style.display = "none";
+                document.getElementById("s2").style.display = "none";
+                document.getElementById("s3").style.display = "none";
+                document.getElementById("s4").style.display = "none";
+                document.getElementById("s5").style.display = "block";
+
+        }
+
+    }
+</script>
 
 <script src="/bootstrap/js/bootstrap.min.js"></script>
 <script src="/bootstrap/js/jquery-3.6.0.min.js"></script>

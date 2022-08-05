@@ -14,7 +14,7 @@
         body{
             background-image: url("https://images.pexels.com/photos/1024967/pexels-photo-1024967.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
         }
-        img{
+        #logo{
             width: 50px;
             height: 70px;
         }
@@ -35,7 +35,7 @@
 <body>
 <div class="row container-fluid head">
     <div class="col-lg-6">
-        <img src="https://furamavietnam.com/wp-content/uploads/2018/10/logo.png" alt="">
+        <img id="logo" src="https://furamavietnam.com/wp-content/uploads/2018/10/logo.png" alt="">
     </div>
     <div class="col-lg-6 ">
         <div class="row m-lg-2">
@@ -122,5 +122,36 @@
         </nav>
     </div>
 </nav>
+<div class="container">
+    <div class="row">
+            <div class="card-group">
+                <div class="card">
+                    <img src="https://tbb-prod-apac.imgix.net/attachments/room_type_photos/images/723975/723975/FV_Livingroom_Two_Bedroom_Villa.jpg?auto=format,compress&fit=crop&crop=entropy&w=1322&q=75" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="https://tbb-prod-apac.imgix.net/attachments/room_type_photos/images/724017/724017/Bedroom.jpg?auto=format,compress&fit=crop&crop=entropy&w=1322&q=75" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="https://nhakhoagiadinh.com.vn/anhr-phong-canh-dep/imager_2_78744_700.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
+                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
+
 </body>
 </html>
