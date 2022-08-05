@@ -18,7 +18,7 @@
             background-attachment: fixed;
             background-position: right bottom;
         }
-        img{
+        .logo{
             width: 50px;
             height: 70px;
         }
@@ -39,17 +39,17 @@
 <body>
 <div class="row container-fluid head">
     <div class="col-lg-6">
-        <img src="https://furamavietnam.com/wp-content/uploads/2018/10/logo.png" alt="">
+        <img class="logo" src="https://furamavietnam.com/wp-content/uploads/2018/10/logo.png" alt="">
     </div>
     <div class="col-lg-6 ">
         <div class="row m-lg-2">
             <div class="col-lg-3">
-                <p class="m-lg-2">Login</p>
+                <p class="m-lg-2"></p>
             </div>
             <div class="col-lg-3">
                 <div class="row">
                     <div class="col-lg-12">
-                        <p class="m-lg-2">register</p>
+                        <p class="m-lg-2"></p>
                     </div>
                 </div>
             </div>
@@ -57,7 +57,7 @@
     </div>
 </div>
 <nav class="navbar navbar-expand-lg navbar-light container sticky-top">
-    <div class="container-fluid bg-transparent ">
+    <div class="container-fluid bg-primary ">
         <a class="navbar-brand" href="/furama">Home</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
@@ -72,8 +72,8 @@
                         Dịch Vụ
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <li><a class="dropdown-item" href="/furama?action=displayServiceList">Danh sách dịch vụ</a></li>
-                        <li><a class="dropdown-item" href="/furama?action=displayAddService">Thêm mới dich vụ</a></li>
+                        <li><a class="dropdown-item" href="/FuramaService?action=displayServiceList">Danh sách dịch vụ</a></li>
+                        <li><a class="dropdown-item" href="/FuramaService?action=displayAddService">Thêm mới dich vụ</a></li>
                         <li><a class="dropdown-item" href="#">Chỉnh sửa dịch vụ</a></li>
                         <%--                <li><a class="dropdown-item" href="#">Xóa dịch vụ</a></li>--%>
                     </ul>
@@ -85,7 +85,7 @@
                         Khách Hàng
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <li><a class="dropdown-item" href="/furama?action=displayCustomerList">Danh sách khách hàng</a></li>
+                        <li><a class="dropdown-item" href="/FuramaCustomer?action=displayCustomerList">Danh sách khách hàng</a></li>
                         <li><a class="dropdown-item" href="#">Thêm mới khách hàng</a></li>
                         <li><a class="dropdown-item" href="#">Chỉnh sửa khách hàng</a></li>
                         <%--                <li><a class="dropdown-item" href="#">Xóa dịch vụ</a></li>--%>
@@ -97,9 +97,7 @@
                         Nhân viên
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <li><a class="dropdown-item" href="/furama?action=displayEmployeeList">Danh sách nhân viên</a></li>
-                        <li><a class="dropdown-item" href="#">Thêm mới nhân viên</a></li>
-                        <li><a class="dropdown-item" href="#">Chỉnh sửa nhân viên</a></li>
+                        <li><a class="dropdown-item" href="/FuramaEmployee?action=displayEmployeeList">Danh sách nhân viên</a></li>
                         <%--                <li><a class="dropdown-item" href="#">Xóa dịch vụ</a></li>--%>
                     </ul>
                 </li>
@@ -120,12 +118,13 @@
             <div class="container-fluid">
                 <form class="d-flex">
                     <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-primary" type="submit">Search</button>
+                    <button class="btn btn-outline-dark bg-info" type="submit" style="color: white">Search</button>
                 </form>
             </div>
         </nav>
     </div>
 </nav>
+
 
 </body>
 </html>
