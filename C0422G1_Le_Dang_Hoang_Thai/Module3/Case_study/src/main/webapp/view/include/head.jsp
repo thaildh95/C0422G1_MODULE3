@@ -107,7 +107,7 @@
                         Hợp đồng
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <li><a class="dropdown-item" href="#">Thêm mới hợp đồng</a></li>
+                        <li><a class="dropdown-item" href="/Contract?action=displayContractList">Thêm mới hợp đồng</a></li>
                         <li><a class="dropdown-item" href="#">Chỉnh sửa chỉnh sửa</a></li>
                         <%--                <li><a class="dropdown-item" href="#">Xóa dịch vụ</a></li>--%>
                     </ul>
