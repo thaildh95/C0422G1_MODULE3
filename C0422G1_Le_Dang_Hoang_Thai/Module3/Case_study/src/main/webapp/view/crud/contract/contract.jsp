@@ -15,9 +15,9 @@
 
 <%@include file="/view/include/head.jsp" %>
 <div class="container">
-  <button style="position: fixed;right: 0" type="button" class="btn btn-success mt-1" data-bs-toggle="modal"
+  <button style="left: 0" type="button" class="btn btn-success mt-1" data-bs-toggle="modal"
           data-bs-target="#addContact" onclick="">
-    THÊM MỚI HỢP ĐỒNG
+    Làm Hợp Đồng
   </button>
   <h2 CLASS="text-center">DANH SÁCH HỢP ĐỒNG</h2>
   <div class="row main mt-2 ">
@@ -36,12 +36,12 @@
       </tr>
       <tr>
         <td>1</td>
-        <td>1</td>
-        <td>2</td>
-        <td>3</td>
-        <td>4</td>
-        <td>5</td>
-        <td>6</td>
+        <td>Xe máy</td>
+        <td>Hoàng Thái</td>
+        <td>20/11/2021</td>
+        <td>21/11/2021</td>
+        <td>100.000</td>
+        <td>700.000</td>
         <td class="d-flex justify-content-center">
 
           <button type="button" class="btn btn-primary me-3" data-bs-toggle="modal"
@@ -50,7 +50,7 @@
           </button>
           <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                   data-bs-target="#attachFacility" onclick="showModalDeleteControl('a','b','c')">
-            Danh sách các dịch vụ đi kèm
+            Dịch vụ kèm thêm
           </button>
         </td>
 
@@ -68,7 +68,7 @@
 
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">TẠO HỢP ĐỒNG</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Hợp Đồng</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body container-fluid">
@@ -96,7 +96,7 @@
             <div class="col-md-12">
               <label class="form-label">Khách hàng</label>
               <select name="customerName" class="form-select">
-                <option value="None">Chọn khách hàng</option>
+                <option value="None">Chọn khách loại hàng</option>
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
@@ -116,9 +116,9 @@
               </select>
             </div>
             <div class="col-md-12">
-              <label class="form-label">DỊch vụ đi kèm</label>
+              <label class="form-label">Dịch vụ đi kèm</label>
               <button type="button" class="btn btn-primary mt-2 mb-2" data-bs-toggle="modal"
-                      data-bs-target="#" onclick="displayAttachFacility()">
+                      data-bs-target="#" onclick="showDisplayFacility()">
                 +
               </button>
 
@@ -131,7 +131,7 @@
                   <th>
                     <button style="display: none" type="button" class="btn btn-danger"
                             data-bs-toggle="modal" data-bs-target="#" id="buttonHide"
-                            onclick="hideAttachFacility()">
+                            onclick="hideDisplayFacility()">
                       x
                     </button>
                   </th>
@@ -175,7 +175,7 @@
 
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="modalEditLable">DANH SÁCH DỊCH VỤ ĐI KÈM</h5>
+        <h5 class="modal-title" id="modalEditLable">Dịch vụ kèm theo</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body container-fluid">
@@ -249,11 +249,11 @@
 </div>
 
 <script>
-  function displayAttachFacility() {
+  function showDisplayFacility() {
     document.getElementById("tableFacilityContract").style.display = 'block'
     document.getElementById("buttonHide").style.display = 'block'
   }
-  function hideAttachFacility() {
+  function hideDisplayFacility() {
     document.getElementById("tableFacilityContract").style.display = 'none'
     document.getElementById("buttonHide").style.display = 'none'
   }
