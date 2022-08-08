@@ -17,22 +17,29 @@ public class CustomerService implements ICustomerService {
     }
 
     @Override
+    public List<CustomerType> showCustomerTypeList() {
+        return  serviceRepository.showCustomerTypeList();
+    }
+
+    @Override
     public boolean add(Customer customer) {
-        return false;
+        return serviceRepository.add(customer);
     }
 
     @Override
-    public boolean edit(Customer customer, int id) {
-        return false;
+
+    public boolean edit(Customer customer) {
+
+        return serviceRepository.edit(customer);
     }
 
     @Override
-    public boolean delete(int id) {
-        return false;
+    public void delete(int id) {
+        serviceRepository.delete(id);
     }
 
     @Override
-    public List<Customer> search() {
+    public List<Customer> search(int id_search) {
         return null;
     }
 
@@ -42,7 +49,13 @@ public class CustomerService implements ICustomerService {
     }
 
     @Override
-    public Customer searchCustomer(int id_search) {
+    public Customer searchCustomer(String name) {
+        return null;
+    }
+
+
+    @Override
+    public Customer findById(int id_search) {
         return null;
     }
 }

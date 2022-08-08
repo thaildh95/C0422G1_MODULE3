@@ -5,7 +5,12 @@
       <map>
         <entry key="file://$PROJECT_DIR$/src/main/webapp/index.jsp" value="file://$PROJECT_DIR$/src/main/webapp" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/view/crud/contract/contract.jsp" value="file://$PROJECT_DIR$/src/main/webapp/view/crud/contract" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/view/crud/customer/add-customer.jsp" value="file://$PROJECT_DIR$/src/main/webapp/view/crud/customer" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/view/crud/customer/list-customer.jsp" value="file://$PROJECT_DIR$/src/main/webapp/view/crud/customer" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/view/crud/employee/list-employee.jsp" value="file://$PROJECT_DIR$/src/main/webapp/view/crud/employee" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/view/crud/facility/add-service.jsp" value="file://$PROJECT_DIR$/src/main/webapp/view/crud/facility" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/view/crud/facility/list-service.jsp" value="file://$PROJECT_DIR$/src/main/webapp/view/crud/facility" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/view/crud/facility/list-servicee.jsp" value="file://$PROJECT_DIR$/src/main/webapp/view/crud/facility" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/view/crud/list-customer.jsp" value="file://$PROJECT_DIR$/src/main/webapp/view/crud" />
       </map>
     </option>

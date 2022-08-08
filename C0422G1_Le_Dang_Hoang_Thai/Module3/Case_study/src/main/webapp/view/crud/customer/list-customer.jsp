@@ -12,7 +12,7 @@
     <title>Danh sách khách hàng</title>
     <link rel="stylesheet" href="/other/bootstrap/css/bootstrap.min.css">
     <style>
-        body{
+        body {
             background-image: url("https://images.freeimages.com/images/large-previews/a3b/website-rays-background-pattern-1637863.png");
         }
 
@@ -20,7 +20,8 @@
 </head>
 <body>
 
-<%@include file="/view/include/head2.jsp"%>
+<%@include file="/view/include/head2.jsp" %>
+<a href="/FuramaCustomer?action=displayAddCustomer"><button type="button" class="btn btn-primary">Thêm mới</button></a>
 <div class="row container-fluid m-0">
     <div class="col-lg-12 ">
         <table class="table table-striped table-hover   ">
@@ -36,107 +37,74 @@
                 <th> Địa chỉ</th>
                 <th colspan="2"></th>
             </tr>
-            <tr>
-                <c:forEach var="customer" items="${customerList}">
 
-            <td>${customer.id}</td>
-            <td>${customer.typeCustomerId}</td>
-            <td>${customer.name}</td>
-            <td>${customer.dayOfBirth}</td>
-            <td>${customer.gender}</td>
-            <td>${customer.idCard}</td>
-            <td>${customer.phoneNumber}</td>
-            <td>${customer.email}</td>
-            <td>${customer.address}</td>
-            <td>
-                </c:forEach>
-            </tr>
-            <td>
-                <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#modalDelete">
-                    Delete
-                </button>
-            </td>
-            </tr>
+            <c:forEach var="customer" items="${customerList}" varStatus="status">
+                <tr>
+
+                    <td>${status.count}</td>
+
+                    <td>
+                        <c:forEach items="${customerTypeList}" var="customerTypeList">
+                            <c:if test="${customer.typeCustomerId==customerTypeList.typeCustomerId}">
+                                ${customerTypeList.customerTypeName}
+                            </c:if>
+                        </c:forEach>
+                    </td>
+                    <td>${customer.name}</td>
+                    <td>${customer.dayOfBirth}</td>
+                    <td>${customer.gender}</td>
+                    <td>${customer.idCard}</td>
+                    <td>${customer.phoneNumber}</td>
+                    <td>${customer.email}</td>
+                    <td>${customer.address}</td>
+                    <td class="d-flex">
+                        <button type="button" class="btn btn-primary me-2" data-bs-toggle="modal"
+                                data-bs-target="#deleteModal"
+                                onclick="deleteById(${customer.customerId}">
+                            Delete
+                        </button>
+
+                        <a href="/FuramaCustomer?action=displayedit&id=${customer.customerId}"> <button type="button" class="btn btn-primary">
+                            Edit
+                        </button></a>
+                    </td>
+                </tr>
             </c:forEach>
-            </tbody>
+
         </table>
+
     </div>
 </div>
 </div>
 
-<!-- Modal delete -->
-<div class="modal fade" id="modalDelete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Delete Confirm</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                Are you sure ?
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-danger">Delete</button>
+<!-- Modal -->
+<form action="/FuramaCustomer?action=deleteCustomer" method="post">
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Delete warning</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="text" name="id" id="id" >
+                    <span> do you want to delete this user?</span> <span id="deleteName"></span>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
+</form>
 
-<%--                    <!-- Button trigger modal -->--%>
-<%--                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">--%>
-<%--                        Edit--%>
-<%--                    </button>--%>
+<script>
+    function deleteById(id) {
+        document.getElementById("id").value = id;
 
-<%--                    <!-- Modal -->--%>
-<%--                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">--%>
-<%--                        <div class="modal-dialog">--%>
-<%--                            <div class="modal-content">--%>
-<%--                                <div class="modal-header">--%>
-<%--                                    <h5 class="modal-title" id="exampleModalLabel">Sửa thông tin</h5>--%>
-<%--                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>--%>
-<%--                                </div>--%>
-<%--                                <div class="modal-body">--%>
-<%--                                   Bạn có muốn sửa không--%>
-<%--                                </div>--%>
-<%--                                <div class="modal-footer">--%>
-<%--                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Không</button>--%>
-<%--                                    <button type="button" class="btn btn-primary">Có</button>--%>
-<%--                                </div>--%>
-<%--                            </div>--%>
-<%--                        </div>--%>
-<%--                    </div>--%>
-<%--                </td>--%>
-<%--                <td>--%>
-                    <!-- Button trigger modal -->
-<%--                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal1">--%>
-<%--                        Delete--%>
-<%--                    </button>--%>
-
-<%--                    <!-- Modal -->--%>
-<%--                    <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel1" aria-hidden="true">--%>
-<%--                        <div class="modal-dialog">--%>
-<%--                            <div class="modal-content">--%>
-<%--                                <div class="modal-header">--%>
-<%--                                    <h5 class="modal-title" id="exampleModalLabel1">Sửa thông tin</h5>--%>
-<%--                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>--%>
-<%--                                </div>--%>
-<%--                                <div class="modal-body">--%>
-<%--                                    Bạn có muốn xóa không ?--%>
-<%--                                </div>--%>
-<%--                                <div class="modal-footer">--%>
-<%--                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Không</button>--%>
-<%--                                    <button type="button" class="btn btn-primary">Có</button>--%>
-<%--                                </div>--%>
-<%--                            </div>--%>
-<%--                        </div>--%>
-<%--                    </div>--%>
-<%--                </td>--%>
-<%--            </tr>--%>
-
-        </table>
-    </div>
-</div>
+    }
+</script>
 <script src="/other/bootstrap/js/bootstrap.min.js"></script>
 <script src="/other/bootstrap/jquery/jquery-3.6.0.min.js"></script>
 </body>

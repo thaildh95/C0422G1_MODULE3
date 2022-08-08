@@ -1,19 +1,27 @@
 package controller;
 
+import model.contract.Facility;
+import model.contract.FacilityType;
+import model.contract.RentType;
+import service.facility.IFacilityService;
+import service.facility.impl.FacilityService;
+
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.util.List;
 
-@WebServlet(name = "FuramaServlet", value = "/FuramaService")
+@WebServlet(name = "FuramaServlet", value = "/facility")
 public class FuramaServiceServlet extends HttpServlet {
+    private static IFacilityService facilityService = new FacilityService();
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action  = request.getParameter("action");
         if (action == null){
             action="";
         }switch (action){
-            case "displayServiceList":
+            case "displayfaciltyList":
                 displayServiceList(request,response);
                 break;
             case "displayAddService":
@@ -25,23 +33,11 @@ public class FuramaServiceServlet extends HttpServlet {
             case "displayHome":
                     displayhome(request,response);
                     break;
-            default:
-                displayhome(request,response);
+
         }
     }
 
 
-    private void displayEmployeeList(HttpServletRequest request, HttpServletResponse response)
-    { RequestDispatcher requestDispatcher = request.getRequestDispatcher("/view/crud/list-employee.jsp");
-        try {
-            requestDispatcher.forward(request,response);
-        } catch (ServletException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-    }
 
     private void displayhome(HttpServletRequest request, HttpServletResponse response) {
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("/view/crud/index.jsp");
@@ -66,9 +62,10 @@ public class FuramaServiceServlet extends HttpServlet {
     }
 
     private void displayAddService(HttpServletRequest request, HttpServletResponse response) {
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/view/crud/service/add-service.jsp");
+        List<RentType> rentTypeList = facilityService.showRentType();
+        request.setAttribute("rentTypeList",rentTypeList);
         try {
-            requestDispatcher.forward(request,response);
+            request.getRequestDispatcher("/view/crud/facility/add-service.jsp").forward(request,response);
         } catch (ServletException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -77,9 +74,14 @@ public class FuramaServiceServlet extends HttpServlet {
     }
 
     private void displayServiceList(HttpServletRequest request, HttpServletResponse response) {
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/view/crud/service/list-service.jsp");
+        List<Facility> facilityList = facilityService.findAll();
+        List<RentType> rentTypeList = facilityService.showRentType();
+        List<FacilityType> facilityTypeList = facilityService.showFacilityType();
+        request.setAttribute("facilityList",facilityList);
+        request.setAttribute("rentTypeList",rentTypeList);
+        request.setAttribute("facilityTypeList",facilityTypeList);
         try {
-            requestDispatcher.forward(request,response);
+            request.getRequestDispatcher("/view/crud/facility/list-servicee.jsp").forward(request,response);
         } catch (ServletException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -95,10 +97,43 @@ public class FuramaServiceServlet extends HttpServlet {
             action="";
         }switch (action){
             case "add":break;
-            case "update":break;
+            case "updateFacility":
+                updateFacility(request,response);
+                break;
             case "delete":break;
             case "search":break;
         }
     }
 
-}
+    private void updateFacility(HttpServletRequest request, HttpServletResponse response) {
+        String name = request.getParameter("name");
+        int area = Integer.parseInt(request.getParameter("area"));
+        double cost = Double.parseDouble(request.getParameter("cost"));
+        int maxPeople = Integer.parseInt(request.getParameter("people"));
+        int rentalTypeId = Integer.parseInt(request.getParameter("rentalType"));
+        int typeId = Integer.parseInt(request.getParameter("id"));
+        String standard = request.getParameter("standard");
+        String convenience = request.getParameter("convenience");
+        int floors = Integer.parseInt(request.getParameter("floors"));
+        String facilityFree = request.getParameter("free");
+        double poolArea = Double.parseDouble(request.getParameter("Pool"));
+        Facility facility = new Facility(name,area,cost,maxPeople,rentalTypeId,typeId,standard,convenience,poolArea,floors,facilityFree);
+
+        List<RentType> rentTypeList = facilityService.showRentType();
+        List<FacilityType> facilityTypeList = facilityService.showFacilityType();
+        request.setAttribute("rentTypeList",rentTypeList);
+        request.setAttribute("facilityTypeList",facilityTypeList);
+        request.setAttribute("facility",facility);
+
+            try {
+                request.getRequestDispatcher("view/facility/add.jsp").forward(request,response);
+            } catch (ServletException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+
+

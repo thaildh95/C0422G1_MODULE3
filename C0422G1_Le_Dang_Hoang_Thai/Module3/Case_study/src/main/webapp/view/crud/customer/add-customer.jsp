@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: Admin
@@ -19,15 +20,16 @@
 <body>
 <%@include file="/view/include/head.jsp"%>
 <div class="container w-50 mt-2 p-2" style="border: 1px solid grey; border-radius: 15px">
-    <h3 align="center">THÊM MỚI DỊCH VỤ</h3>
-    <form class="row g-3" action="" method="post">
+    <h3 align="center">THÊM MỚI KHÁCH HÀNG</h3>
+    <form class="row g-3" action="/customer?action=addNewCustomer" method="post">
         <div class="col-md-12">
-            <label class="form-label">Loại dịch vụ</label>
-            <select name=""  class="form-select" onchange="showForm(this.value)">
-                <%--                <option value="None" >Chọn loại dịch vụ</option>--%>
-                <option value="Villa" >Villa</option>
-                <option value="House" >House</option>
-                <option value="Room" >Room</option>
+            <label class="form-label">Loại khách </label>
+            <select name="customertype"  class="form-select" >
+                <option value="None" disabled >Chọn loại khách</option>
+                <c:forEach  var="customerTypeList" items="${customerTypeList}">
+                    <option value="${customerTypeList.typeCustomerId}">${customerTypeList.customerTypeName}</option>
+                </c:forEach>
+
             </select>
         </div>
 
@@ -36,55 +38,36 @@
             <input type="text" class="form-control" id="name" name="name" placeholder="Họ và tên" required>
         </div>
         <div class="col-md-12">
-            <label for="dayOfBirth" class="form-label">Ngày sinh</label>
-            <input type="date" class="form-control" id="dayOfBirth" name="dayOfBirth" placeholder="Ngày sinh" required>
+            <label for="birth" class="form-label">Ngày sinh</label>
+            <input type="date" class="form-control" id="birth" name="birth" placeholder="Ngày sinh" required>
         </div>
 
         <div class="col-md-12">
-            <label for="gender" class="form-label">Giới tính</label>
-            <input type="radio" class="form-control" id="gender" name="gender" placeholder="Giới tính" required>
+            <label class="form-label">Giới tính</label>
+            <input type="radio"  class="form-check-input" name="gender" value="1" > Nam
+            <input type="radio" class="form-check-input" name="gender" value="0">Nữ
+
         </div>
 
         <div class="col-md-12">
-            <label for="cost" class="form-label">Chi phí thuê</label>
-            <input type="text" class="form-control" id="cost"  name="cost" placeholder="chi phí thuê" required>
+            <label for="idcard" class="form-label">CMND</label>
+            <input type="text" class="form-control" id="idcard"  name="idcard" placeholder="CMND" required>
         </div>
         <div class="col-md-12">
-            <label for="inputAddress2" class="form-label">Số lượng người tối đa </label>
-            <input type="text" class="form-control" id="inputAddress2"  name="max_people" placeholder="số người tối đa" required >
+            <label for="phone" class="form-label">Số điện thoại </label>
+            <input type="text" class="form-control" id="phone"  name="phone" placeholder="số điện thoại" required >
         </div>
         <div class="col-md-12">
-            <label for="inputCity" class="form-label">Kiểu thuê</label>
-            <input type="text" class="form-control" id="inputCity" name="rent_type" placeholder="kiểu thuê" required>
+            <label for="email" class="form-label">email</label>
+            <input type="text" class="form-control" id="email" name="email" placeholder="email" required>
         </div>
-        <div class="col-md-12 " id="s1" style="display: none">
-            <label for="room_standard" class="form-label">Tiêu chuẩn phòng </label>
-            <input type="text" class="form-control" id="room_standard" name="room_standard" placeholder="tiêu chuẩn phòng" required>
-        </div>
-
-        <div class="col-md-12 " id="s2" style="display: none">
-            <label for="description_other_convenience" class="form-label">Mô tả tiện nghi khác</label>
-            <input type="text" class="form-control" id="description_other_convenience" name="description_other_convenience">
+        <div class="col-md-12 ">
+            <label for="address" class="form-label">Địa chỉ </label>
+            <input type="text" class="form-control" id="address" name="address" placeholder="địa chỉ" required>
         </div>
 
-        <div class="col-md-12 " id="s3" style="display: none">
-            <label for="pool_area" class="form-label">Diện tích hồ bơi  </label>
-            <input type="text" class="form-control" id="pool_area" name="pool_area">
-        </div>
-
-        <div class="col-md-12" id="s4" style="display: none">
-            <label for="number_of_floors" class="form-label">Số tầng </label>
-            <input type="text" class="form-control" id="number_of_floors" name="number_of_floors">
-        </div>
-
-        <div class="col-md-12 " id="s5" style="display: none">
-            <label for="facility_free" class="form-label">Dịch vụ miễn phí đi kèm </label>
-            <input type="text" class="form-control" id="facility_free" name="facility_free">
-        </div>
-
-        <div class="col-12 ">
             <button type="submit" class="btn btn-primary">Gửi</button>
-        </div>
+
     </form>
 </div>
 

@@ -16,13 +16,18 @@ public class Customer extends Person {
         this.gender = gender;
     }
 
-    public Customer(int customerId, int typeCustomerId, String name, Date dayOfBirth, int gender, String idCard, String phoneNumber, String email, String address ) {
+    public Customer( int typeCustomerId, String name, String dayOfBirth, int gender, String idCard, String phoneNumber, String email, String address ) {
         super(name, dayOfBirth, idCard, phoneNumber, email, address);
         this.customerId = customerId;
         this.typeCustomerId = typeCustomerId;
         this.gender = gender;
     }
-
+    public Customer( int customerId ,int typeCustomerId, String name, String dayOfBirth, int gender, String idCard, String phoneNumber, String email, String address) {
+        super(name, dayOfBirth, idCard, phoneNumber, email, address);
+        this.customerId = customerId;
+        this.typeCustomerId = typeCustomerId;
+        this.gender = gender;
+    }
 
 
 

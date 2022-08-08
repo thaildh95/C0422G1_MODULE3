@@ -7,14 +7,15 @@ import java.util.List;
 
 public interface ICustomerServiceRepository {
     List<Customer> showAll();
-
+    List<CustomerType> showCustomerTypeList();
     boolean add(Customer customer);
 
-    boolean edit(Customer customer,int id);
+    boolean edit(Customer customer);
 
-    boolean delete(int id);
+    void delete(int id);
 
-    List<Customer> search();
+    List<Customer> search(int id_search);
     List<CustomerType> getCustomerTypeList();
-    Customer searchCustomer(int id_search);
+    Customer searchCustomer(String name);
+    Customer findById(int id_search);
 }

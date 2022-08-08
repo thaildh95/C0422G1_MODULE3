@@ -4,7 +4,7 @@ import java.sql.Date;
 
 public abstract class Person {
     private  String name;
-    private Date dayOfBirth;
+    private String dayOfBirth;
     private String idCard;
     private String phoneNumber;
     private String Email;
@@ -13,7 +13,7 @@ public abstract class Person {
     public Person() {
     }
 
-    public Person(String name, Date dayOfBirth, String idCard, String phoneNumber, String email, String address) {
+    public Person(String name, String dayOfBirth, String idCard, String phoneNumber, String email, String address) {
         this.name = name;
         this.dayOfBirth = dayOfBirth;
         this.idCard = idCard;
@@ -30,11 +30,11 @@ public abstract class Person {
         this.name = name;
     }
 
-    public Date getDayOfBirth() {
+    public String getDayOfBirth() {
         return dayOfBirth;
     }
 
-    public void setDayOfBirth(Date dayOfBirth) {
+    public void setDayOfBirth(String dayOfBirth) {
         this.dayOfBirth = dayOfBirth;
     }
 

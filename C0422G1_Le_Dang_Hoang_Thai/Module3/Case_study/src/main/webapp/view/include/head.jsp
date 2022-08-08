@@ -72,8 +72,8 @@
                         Dịch Vụ
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <li><a class="dropdown-item" href="/FuramaService?action=displayServiceList">Danh sách dịch vụ</a></li>
-                        <li><a class="dropdown-item" href="/FuramaService?action=displayAddService">Thêm mới dich vụ</a></li>
+                        <li><a class="dropdown-item" href="/facility?action=displayfaciltyList">Danh sách dịch vụ</a></li>
+                        <li><a class="dropdown-item" href="/facility?action=displayAddService">Thêm mới dich vụ</a></li>
                         <li><a class="dropdown-item" href="#">Chỉnh sửa dịch vụ</a></li>
                         <%--                <li><a class="dropdown-item" href="#">Xóa dịch vụ</a></li>--%>
                     </ul>
