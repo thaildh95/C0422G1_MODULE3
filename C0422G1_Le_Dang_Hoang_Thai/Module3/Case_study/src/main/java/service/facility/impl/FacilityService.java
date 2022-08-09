@@ -25,33 +25,38 @@ public class FacilityService implements IFacilityService {
 
     @Override
     public boolean editFacility(Facility facility) {
-        return false;
+
+        return facilityRepository.updateFacility(facility);
     }
 
 
     @Override
     public void delete(int id) {
 
+
     }
 
     @Override
     public void deleteFacility(int id) {
+        facilityRepository.deleteFacility(id);
 
     }
 
     @Override
     public Facility findById(int id) {
-        return null;
+
+        return facilityRepository.findById(id);
     }
 
     @Override
     public List<FacilityType> showFacilityType() {
-        return null;
+        return facilityRepository.showFacilityType();
     }
 
     @Override
     public List<RentType> showRentType() {
-        return null;
+        return  facilityRepository.showRentType();
+
     }
 
     @Override

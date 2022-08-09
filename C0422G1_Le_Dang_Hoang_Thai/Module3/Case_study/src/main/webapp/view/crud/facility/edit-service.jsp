@@ -22,9 +22,9 @@
     <div class="row">
         <div class="col-lg-10 d-flex justify-content-center  position-absolute" style="top: 7%">
             <div class="row" style="width: 95%">
-                <div class="col-lg-12 text-center"><h2>Add New Service</h2></div>
+                <div class="col-lg-12 text-center"><h2>EDIT SERVICE</h2></div>
                 <div class="col-lg-12">
-                    <form class="row" action="/facility" method="post">
+                    <form class="row" action="/facility?action=updateFacility&facilityCode=${facility.id}" method="post">
                         <div class="col-lg-2 ps-5">
                             <div class="form-check" onclick="showInput(roomInput.value)">
                                 <input type="hidden" value="${facility.facilityTypeId}" id="onload">
@@ -84,7 +84,7 @@
                                         </select>
                                     </div>
                                     <div class="row">
-                                        <button type="submit" name="action" value="add" class="btn btn-primary">Add
+                                        <button type="submit" class="btn btn-primary">Add
                                         </button>
                                     </div>
                                 </div>

@@ -37,10 +37,16 @@ public class FuramaCustomerServlet extends HttpServlet {
     }
 
     private void displayEditForm(HttpServletRequest request, HttpServletResponse response) {
+        int id = Integer.parseInt(request.getParameter("customerId"));
         List<CustomerType> customerTypeList = customerService.showCustomerTypeList();
         request.setAttribute("customerTypeList", customerTypeList);
+        Customer customer = customerService.findById(id);
+        request.setAttribute("customer",customer);
+
         try {
+
             request.getRequestDispatcher("/view/crud/customer/edit-customer.jsp").forward(request,response);
+
         } catch (ServletException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -77,7 +83,6 @@ public class FuramaCustomerServlet extends HttpServlet {
             case "deleteCustomer":
                 deleteCustomer(request, response);
                 break;
-
         }
     }
 
@@ -89,19 +94,20 @@ public class FuramaCustomerServlet extends HttpServlet {
     }
 
     private void editCustomer(HttpServletRequest request, HttpServletResponse response) {
+        int customerId = Integer.parseInt(request.getParameter("customerId"));
         int customerTypeId = Integer.parseInt(request.getParameter("customertype"));
         String name = request.getParameter("name");
         String dayOfBirth =request.getParameter("birth");
         int gender = Integer.parseInt(request.getParameter("gender"));
-
         String idCard = request.getParameter("idcard");
         String phoneNumber= request.getParameter("phone");
         String email= request.getParameter("email");
-
         String address = request.getParameter("address");
+
 //        int customerId = Integer.parseInt(request.getParameter("id"));
-        Customer customer = new Customer(customerTypeId,name,dayOfBirth,gender,idCard,phoneNumber,email,address);
+        Customer customer = new Customer(customerId,customerTypeId,name,dayOfBirth,gender,idCard,phoneNumber,email,address);
         customerService.edit(customer);
+        request.setAttribute("customer",customer);
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("/view/crud/customer/list-customer.jsp");
 
         try {
@@ -124,7 +130,6 @@ public class FuramaCustomerServlet extends HttpServlet {
         String address = request.getParameter("address");
         Customer customer = new Customer(customerTypeId,name,dayOfBirth,gender,idCard,phoneNumber,email,address);
         customerService.add(customer);
-
 
         List<Customer> customerList = customerService.showCustomerList();
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("/view/crud/customer/add-customer.jsp");

@@ -15,14 +15,16 @@ import java.util.List;
 @WebServlet(name = "FuramaServlet", value = "/facility")
 public class FuramaServiceServlet extends HttpServlet {
     private static IFacilityService facilityService = new FacilityService();
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String action  = request.getParameter("action");
-        if (action == null){
-            action="";
-        }switch (action){
+        String action = request.getParameter("action");
+        if (action == null) {
+            action = "";
+        }
+        switch (action) {
             case "displayfaciltyList":
-                displayServiceList(request,response);
+                displayServiceList(request, response);
                 break;
             case "displayAddService":
                 displayAddService(request, response);
@@ -31,18 +33,17 @@ public class FuramaServiceServlet extends HttpServlet {
                 displayEditService(request, response);
                 break;
             case "displayHome":
-                    displayhome(request,response);
-                    break;
+                displayhome(request, response);
+                break;
 
         }
     }
 
 
-
     private void displayhome(HttpServletRequest request, HttpServletResponse response) {
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("/view/crud/index.jsp");
         try {
-            requestDispatcher.forward(request,response);
+            requestDispatcher.forward(request, response);
         } catch (ServletException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -51,9 +52,13 @@ public class FuramaServiceServlet extends HttpServlet {
     }
 
     private void displayEditService(HttpServletRequest request, HttpServletResponse response) {
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/view/crud/service/edit-service.jsp");
+        int facilityCode = Integer.parseInt(request.getParameter("facilityCode"));
+        List<RentType> rentTypeList = facilityService.showRentType();
+        Facility facility = facilityService.findById(facilityCode);
+        request.setAttribute("rentTypeList",rentTypeList);
+        request.setAttribute("facility",facility);
         try {
-            requestDispatcher.forward(request,response);
+            request.getRequestDispatcher("/view/crud/facility/edit-service.jsp").forward(request,response);
         } catch (ServletException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -63,9 +68,9 @@ public class FuramaServiceServlet extends HttpServlet {
 
     private void displayAddService(HttpServletRequest request, HttpServletResponse response) {
         List<RentType> rentTypeList = facilityService.showRentType();
-        request.setAttribute("rentTypeList",rentTypeList);
+        request.setAttribute("rentTypeList", rentTypeList);
         try {
-            request.getRequestDispatcher("/view/crud/facility/add-service.jsp").forward(request,response);
+            request.getRequestDispatcher("/view/crud/facility/add-service.jsp").forward(request, response);
         } catch (ServletException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -77,11 +82,11 @@ public class FuramaServiceServlet extends HttpServlet {
         List<Facility> facilityList = facilityService.findAll();
         List<RentType> rentTypeList = facilityService.showRentType();
         List<FacilityType> facilityTypeList = facilityService.showFacilityType();
-        request.setAttribute("facilityList",facilityList);
-        request.setAttribute("rentTypeList",rentTypeList);
-        request.setAttribute("facilityTypeList",facilityTypeList);
+        request.setAttribute("facilityList", facilityList);
+        request.setAttribute("rentTypeList", rentTypeList);
+        request.setAttribute("facilityTypeList", facilityTypeList);
         try {
-            request.getRequestDispatcher("/view/crud/facility/list-servicee.jsp").forward(request,response);
+            request.getRequestDispatcher("/view/crud/facility/list-servicee.jsp").forward(request, response);
         } catch (ServletException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -92,16 +97,74 @@ public class FuramaServiceServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String action  = request.getParameter("action");
-        if (action == null){
-            action="";
-        }switch (action){
-            case "add":break;
-            case "updateFacility":
-                updateFacility(request,response);
+        String action = request.getParameter("action");
+        if (action == null) {
+            action = "";
+        }
+        switch (action) {
+            case "add":
+                addFacility(request, response);
                 break;
-            case "delete":break;
-            case "search":break;
+            case "updateFacility":
+                updateFacility(request, response);
+                break;
+            case "delete":
+                deleteFacility(request,response);
+                break;
+            case "search":
+                break;
+        }
+    }
+
+    private void deleteFacility(HttpServletRequest request, HttpServletResponse response) {
+        int id = Integer.parseInt(request.getParameter("facilityCode"));
+        facilityService.deleteFacility(id);
+        List<Facility> facilityList = facilityService.findAll();
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/view/crud/facility/list-servicee.jsp");
+        request.setAttribute("facilityList",facilityList);
+        try {
+            requestDispatcher.forward(request,response);
+        } catch (ServletException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void addFacility(HttpServletRequest request, HttpServletResponse response) {
+        String name = request.getParameter("name");
+        int area = Integer.parseInt(request.getParameter("area"));
+        double cost = Double.parseDouble(request.getParameter("cost"));
+        int maxPeople = Integer.parseInt(request.getParameter("people"));
+        int rentalTypeId = Integer.parseInt(request.getParameter("rentalType"));
+        int typeId = Integer.parseInt(request.getParameter("id"));
+        String standard = request.getParameter("standard");
+        String convenience = request.getParameter("convenience");
+//        int floors = Integer.parseInt(request.getParameter("floors"));
+        Double poolArea;
+        if (request.getParameter("Pool") == "") {
+            poolArea = 0.0;
+        } else
+            poolArea = Double.parseDouble(request.getParameter("Pool"));
+        int floors;
+        if (request.getParameter("floors") == "") {
+            floors = 0;
+        } else floors = Integer.parseInt(request.getParameter("floors"));
+        String facilityFree = request.getParameter("free");
+//        double poolArea = Double.parseDouble(request.getParameter("Pool"));
+
+        Facility facility = new Facility(name, area, cost, maxPeople, rentalTypeId, typeId, standard, convenience, poolArea, floors, facilityFree);
+        facilityService.addFacility(facility);
+        List<RentType> rentTypeList = facilityService.showRentType();
+        List<FacilityType> facilityTypeList = facilityService.showFacilityType();
+        displayServiceList(request, response);
+
+        try {
+            request.getRequestDispatcher("/view/crud/facility/list-servicee.jsp").forward(request, response);
+        } catch (ServletException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
@@ -112,28 +175,39 @@ public class FuramaServiceServlet extends HttpServlet {
         int maxPeople = Integer.parseInt(request.getParameter("people"));
         int rentalTypeId = Integer.parseInt(request.getParameter("rentalType"));
         int typeId = Integer.parseInt(request.getParameter("id"));
+        int id = Integer.parseInt(request.getParameter("facilityCode"));
         String standard = request.getParameter("standard");
         String convenience = request.getParameter("convenience");
-        int floors = Integer.parseInt(request.getParameter("floors"));
+//        int floors = Integer.parseInt(request.getParameter("floors"));
+        Double poolArea;
+        if (request.getParameter("Pool") == "") {
+            poolArea = 0.0;
+        } else
+            poolArea = Double.parseDouble(request.getParameter("Pool"));
+        int floors;
+        if (request.getParameter("floors") == "") {
+            floors = 0;
+        } else floors = Integer.parseInt(request.getParameter("floors"));
         String facilityFree = request.getParameter("free");
-        double poolArea = Double.parseDouble(request.getParameter("Pool"));
-        Facility facility = new Facility(name,area,cost,maxPeople,rentalTypeId,typeId,standard,convenience,poolArea,floors,facilityFree);
 
+//        double poolArea = Double.parseDouble(request.getParameter("Pool"));
+
+        Facility facility = new Facility(id,name, area, cost, maxPeople, rentalTypeId, typeId, standard, convenience, poolArea, floors, facilityFree);
+        facilityService.editFacility(facility);
         List<RentType> rentTypeList = facilityService.showRentType();
         List<FacilityType> facilityTypeList = facilityService.showFacilityType();
-        request.setAttribute("rentTypeList",rentTypeList);
-        request.setAttribute("facilityTypeList",facilityTypeList);
-        request.setAttribute("facility",facility);
 
-            try {
-                request.getRequestDispatcher("view/facility/add.jsp").forward(request,response);
-            } catch (ServletException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+        List<Facility> list= facilityService.findAll();
+        request.setAttribute("facilityList",list);
+
+        try {
+            request.getRequestDispatcher("/view/crud/facility/list-servicee.jsp").forward(request, response);
+        } catch (ServletException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
 
-
+}

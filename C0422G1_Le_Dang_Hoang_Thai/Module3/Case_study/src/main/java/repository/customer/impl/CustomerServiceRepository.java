@@ -18,6 +18,7 @@ public class CustomerServiceRepository implements ICustomerServiceRepository {
     private final String SELECT_CUSTOMER_TYPE = "call select_customer_type()";
     private final String DELETE_CUSTOMER = "call delete_customer(?)";
 
+
     @Override
     public List<Customer> showAll() {
         List<Customer> customerList = new ArrayList<>();
@@ -39,7 +40,7 @@ public class CustomerServiceRepository implements ICustomerServiceRepository {
                 String phoneNumer = resultSet.getString(7);
                 String email = resultSet.getString(8);
                 String address = resultSet.getString(9);
-                Customer customer = new Customer(customerTypeId, name, dayOfBirth, gender, idCard, phoneNumer, email, address);
+                Customer customer = new Customer(id,customerTypeId, name, dayOfBirth, gender, idCard, phoneNumer, email, address);
                 customerList.add(customer);
 
             }

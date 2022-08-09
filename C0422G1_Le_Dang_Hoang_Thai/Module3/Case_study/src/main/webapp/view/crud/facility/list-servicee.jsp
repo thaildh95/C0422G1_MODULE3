@@ -65,7 +65,7 @@
                     <td>${facility.floors}</td>
                     <td>${facility.facilityFree}</td>
                     <td class="d-flex">
-                        <a href="/facility?action=edit&facilityCode=${facility.id}">
+                        <a href="/facility?action=displayEditService&facilityCode=${facility.id}">
                             <button style="padding: 5px" class="btn btn-primary">
                                 <span class="material-symbols-outlined">edit</span>
                             </button>
@@ -83,7 +83,7 @@
     </div>
 </div>
 
-<form action="/facility">
+<form action="/facility" method="post">
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">

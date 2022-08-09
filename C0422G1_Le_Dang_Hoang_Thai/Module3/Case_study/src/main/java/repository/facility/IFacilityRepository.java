@@ -11,7 +11,7 @@ public interface IFacilityRepository {
 
    boolean addNewFacility(Facility facility);
 
-    void updateFacility(Facility facility);
+    boolean updateFacility(Facility facility);
 
     void deleteFacility(int id);
 

@@ -41,7 +41,8 @@
             <c:forEach var="customer" items="${customerList}" varStatus="status">
                 <tr>
 
-                    <td>${status.count}</td>
+<%--                    <td>${status.count}</td>--%>
+                    <td>${customer.customerId}</td>
 
                     <td>
                         <c:forEach items="${customerTypeList}" var="customerTypeList">
@@ -63,10 +64,10 @@
                                 onclick="deleteById(${customer.customerId}">
                             Delete
                         </button>
-
-                        <a href="/FuramaCustomer?action=displayedit&id=${customer.customerId}"> <button type="button" class="btn btn-primary">
-                            Edit
-                        </button></a>
+                        <a href="/FuramaCustomer?action=displayedit&customerId=${customer.customerId}" name="id">
+                            <button type="button" class="btn btn-primary">
+                            Edit</button>
+                        </a>
                     </td>
                 </tr>
             </c:forEach>
@@ -87,7 +88,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <input type="text" name="id" id="id" >
+                    <input type="text" name="deleteId" id="id" >
                     <span> do you want to delete this user?</span> <span id="deleteName"></span>
                 </div>
                 <div class="modal-footer">
@@ -101,7 +102,7 @@
 
 <script>
     function deleteById(id) {
-        document.getElementById("id").value = id;
+        document.getElementById("deleteId").value = id;
 
     }
 </script>
