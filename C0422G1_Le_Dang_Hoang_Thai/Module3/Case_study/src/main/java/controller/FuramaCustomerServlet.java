@@ -85,7 +85,28 @@ public class FuramaCustomerServlet extends HttpServlet {
             case "deleteCustomer":
                 deleteCustomer(request, response);
                 break;
+            case "searchByName":
+                searchByName(request, response);
+                break;
         }
+    }
+
+    private void searchByName(HttpServletRequest request, HttpServletResponse response) {
+        String name = request.getParameter("name");
+        customerService.searchCustomer(name);
+        List<Customer> customerList = customerService.showCustomerList();
+        List<CustomerType> customerTypeList = customerService.showCustomerTypeList();
+        request.setAttribute("customerList", customerList);
+        request.setAttribute("customerTypeList", customerTypeList);
+        try {
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher("view/crud/customer/list-customer.jsp");
+            requestDispatcher.forward(request,response);
+        } catch (ServletException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
     private void deleteCustomer(HttpServletRequest request, HttpServletResponse response) {

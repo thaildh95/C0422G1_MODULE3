@@ -135,9 +135,7 @@ public class CustomerServiceRepository implements ICustomerServiceRepository {
 
     @Override
     public List<Customer> search(int id_search) {
-
-        return null;
-
+       return null;
     }
 
     @Override
@@ -164,7 +162,7 @@ public class CustomerServiceRepository implements ICustomerServiceRepository {
                 String phoneNumber = resultSet.getString("so_dien_thoai");
                 String email = resultSet.getString("email");
                 String address = resultSet.getString("dia_chi");
-                customer = new Customer(customerTypeId, name, dayOfBirth, gender, idCard, phoneNumber, email, address);
+                customer = new Customer(customerId,customerTypeId, name, dayOfBirth, gender, idCard, phoneNumber, email, address);
             }
         } catch (SQLException e) {
             e.printStackTrace();

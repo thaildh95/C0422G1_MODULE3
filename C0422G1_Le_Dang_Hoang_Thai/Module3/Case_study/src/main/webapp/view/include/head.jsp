@@ -114,8 +114,8 @@
         </div>
         <nav class="navbar navbar-light ">
             <div class="container-fluid">
-                <form class="d-flex">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <form class="d-flex" action="/customer?action=searchByName">
+                    <input class="form-control me-2" type="search" name="name" placeholder="Search" aria-label="Search">
                     <button class="btn btn-outline-dark bg-info" type="submit" style="color: white">Search</button>
                 </form>
             </div>

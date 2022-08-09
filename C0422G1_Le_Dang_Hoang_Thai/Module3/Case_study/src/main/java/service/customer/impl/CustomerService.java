@@ -50,7 +50,8 @@ public class CustomerService implements ICustomerService {
 
     @Override
     public Customer searchCustomer(String name) {
-        return null;
+
+        return serviceRepository.searchCustomer(name);
     }
 
 
