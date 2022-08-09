@@ -40,7 +40,7 @@ public class CustomerServiceRepository implements ICustomerServiceRepository {
                 String phoneNumer = resultSet.getString(7);
                 String email = resultSet.getString(8);
                 String address = resultSet.getString(9);
-                Customer customer = new Customer(id,customerTypeId, name, dayOfBirth, gender, idCard, phoneNumer, email, address);
+                Customer customer = new Customer(id, customerTypeId, name, dayOfBirth, gender, idCard, phoneNumer, email, address);
                 customerList.add(customer);
 
             }
@@ -53,22 +53,22 @@ public class CustomerServiceRepository implements ICustomerServiceRepository {
     @Override
     public List<CustomerType> showCustomerTypeList() {
         List<CustomerType> customerTypeList = new ArrayList<>();
-        Connection connection =FuramaDatabaseConnection.getConnection();
+        Connection connection = FuramaDatabaseConnection.getConnection();
 
         try {
             CallableStatement callableStatement = connection.prepareCall(SELECT_CUSTOMER_TYPE);
             ResultSet resultSet = callableStatement.executeQuery();
-            while (resultSet.next()){
+            while (resultSet.next()) {
                 int id = resultSet.getInt(1);
                 String customerTypeName = resultSet.getString(2);
-                customerTypeList.add(new CustomerType(id,customerTypeName));
+                customerTypeList.add(new CustomerType(id, customerTypeName));
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
 
-        return  customerTypeList;
+        return customerTypeList;
     }
 
     @Override
@@ -96,20 +96,20 @@ public class CustomerServiceRepository implements ICustomerServiceRepository {
 
     @Override
     public boolean edit(Customer customer) {
-        boolean rowUpdate =false;
+        boolean rowUpdate = false;
         Connection connection = FuramaDatabaseConnection.getConnection();
         CallableStatement callableStatement;
         try {
             callableStatement = connection.prepareCall(EDIT_CUSTOMER);
-            callableStatement.setInt(1,customer.getTypeCustomerId());
-            callableStatement.setString(2,customer.getName());
-            callableStatement.setString(3,customer.getDayOfBirth());
-            callableStatement.setInt(4,customer.getGender());
-            callableStatement.setString(5,customer.getIdCard());
-            callableStatement.setString(6,customer.getPhoneNumber());
-            callableStatement.setString(7,customer.getEmail());
-            callableStatement.setString(8,customer.getAddress());
-            callableStatement.setInt(9,customer.getCustomerId());
+            callableStatement.setInt(1, customer.getTypeCustomerId());
+            callableStatement.setString(2, customer.getName());
+            callableStatement.setString(3, customer.getDayOfBirth());
+            callableStatement.setInt(4, customer.getGender());
+            callableStatement.setString(5, customer.getIdCard());
+            callableStatement.setString(6, customer.getPhoneNumber());
+            callableStatement.setString(7, customer.getEmail());
+            callableStatement.setString(8, customer.getAddress());
+            callableStatement.setInt(9, customer.getCustomerId());
             rowUpdate = callableStatement.executeUpdate() > 0;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -124,7 +124,7 @@ public class CustomerServiceRepository implements ICustomerServiceRepository {
         CallableStatement callableStatement;
         try {
             callableStatement = connection.prepareCall(DELETE_CUSTOMER);
-            callableStatement.setInt(1,id);
+            callableStatement.setInt(1, id);
             callableStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -149,12 +149,12 @@ public class CustomerServiceRepository implements ICustomerServiceRepository {
     @Override
 
     public Customer searchCustomer(String name_customer) {
-        Connection connection=FuramaDatabaseConnection.getConnection();
-        Customer customer=null;
+        Connection connection = FuramaDatabaseConnection.getConnection();
+        Customer customer = null;
         try {
             CallableStatement callableStatement = connection.prepareCall(FIND_CUSTOMER_BY_NAME);
             ResultSet resultSet = callableStatement.executeQuery();
-            while (resultSet.next()){
+            while (resultSet.next()) {
                 int customerId = resultSet.getInt("ma_khach_hang");
                 int customerTypeId = resultSet.getInt("ma_loai_khach");
                 String name = resultSet.getString("ho_ten");
@@ -174,7 +174,6 @@ public class CustomerServiceRepository implements ICustomerServiceRepository {
     }
 
 
-
     @Override
     public Customer findById(int id) {
 
@@ -182,7 +181,7 @@ public class CustomerServiceRepository implements ICustomerServiceRepository {
         Customer customer = null;
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(FIND_BY_ID);
-            preparedStatement.setInt(1,id);
+            preparedStatement.setInt(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
 
@@ -195,10 +194,11 @@ public class CustomerServiceRepository implements ICustomerServiceRepository {
                 int customerId = resultSet.getInt("ma_khach_hang");
                 int customerTypeId = resultSet.getInt("ma_loai_khach");
                 int gender = resultSet.getInt("gioi_tinh");
-                customer = new Customer(customerTypeId, name, birthDay,  gender,idCard, phone, email, address);
+                customer = new Customer(customerId, customerTypeId, name, birthDay, gender, idCard, phone, email, address);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return customer;
-}}
+    }
+}

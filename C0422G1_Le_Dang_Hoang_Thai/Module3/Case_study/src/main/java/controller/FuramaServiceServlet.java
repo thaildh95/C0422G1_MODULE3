@@ -155,9 +155,13 @@ public class FuramaServiceServlet extends HttpServlet {
 
         Facility facility = new Facility(name, area, cost, maxPeople, rentalTypeId, typeId, standard, convenience, poolArea, floors, facilityFree);
         facilityService.addFacility(facility);
+        List<Facility> facilityList = facilityService.findAll();
         List<RentType> rentTypeList = facilityService.showRentType();
         List<FacilityType> facilityTypeList = facilityService.showFacilityType();
-        displayServiceList(request, response);
+        request.setAttribute("facilityList", facilityList);
+        request.setAttribute("rentTypeList", rentTypeList);
+        request.setAttribute("facilityTypeList", facilityTypeList);
+
 
         try {
             request.getRequestDispatcher("/view/crud/facility/list-servicee.jsp").forward(request, response);

@@ -58,7 +58,7 @@
 </div>
 <nav class="navbar navbar-expand-lg navbar-light container sticky-top">
     <div class="container-fluid bg-primary ">
-        <a class="navbar-brand" href="/furama">Home</a>
+        <a class="navbar-brand" href="/customer?action=displayHome">Home</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
                 aria-label="Toggle navigation">
@@ -73,8 +73,6 @@
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                         <li><a class="dropdown-item" href="/facility?action=displayfaciltyList">Danh sách dịch vụ</a></li>
-                        <li><a class="dropdown-item" href="/facility?action=displayAddService">Thêm mới dich vụ</a></li>
-                        <li><a class="dropdown-item" href="#">Chỉnh sửa dịch vụ</a></li>
                         <%--                <li><a class="dropdown-item" href="#">Xóa dịch vụ</a></li>--%>
                     </ul>
                 </li>

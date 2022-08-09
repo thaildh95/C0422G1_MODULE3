@@ -31,6 +31,8 @@ public class FuramaCustomerServlet extends HttpServlet {
             case "displayedit":
                 displayEditForm(request, response);
                 break;
+            case "displayHome":
+                displayhome(request,response);
             default: displayCustomerList(request, response);
             break;
         }
@@ -87,9 +89,20 @@ public class FuramaCustomerServlet extends HttpServlet {
     }
 
     private void deleteCustomer(HttpServletRequest request, HttpServletResponse response) {
-        int id = Integer.parseInt(request.getParameter("id"));
+        int id = Integer.parseInt(request.getParameter("customerId"));
         customerService.delete(id);
-        displayCustomerList(request,response);
+        List<Customer> customerList = customerService.showCustomerList();
+        List<CustomerType> customerTypeList = customerService.showCustomerTypeList();
+        request.setAttribute("customerList",customerList);
+        request.setAttribute("customerTypeList",customerTypeList);
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/view/crud/customer/list-customer.jsp");
+        try {
+            requestDispatcher.forward(request,response);
+        } catch (ServletException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
     }
 
@@ -108,6 +121,10 @@ public class FuramaCustomerServlet extends HttpServlet {
         Customer customer = new Customer(customerId,customerTypeId,name,dayOfBirth,gender,idCard,phoneNumber,email,address);
         customerService.edit(customer);
         request.setAttribute("customer",customer);
+        List<Customer> customerList = customerService.showCustomerList();
+        List<CustomerType> customerTypeList = customerService.showCustomerTypeList();
+        request.setAttribute("customerList",customerList);
+        request.setAttribute("customerTypeList",customerTypeList);
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("/view/crud/customer/list-customer.jsp");
 
         try {
@@ -147,10 +164,10 @@ public class FuramaCustomerServlet extends HttpServlet {
     private void displayCustomerList(HttpServletRequest request, HttpServletResponse response) {
         List<Customer> customerList = customerService.showCustomerList();
         List<CustomerType> customerTypeList = customerService.showCustomerTypeList();
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("view/crud/customer/list-customer.jsp");
         request.setAttribute("customerList", customerList);
         request.setAttribute("customerTypeList", customerTypeList);
         try {
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher("view/crud/customer/list-customer.jsp");
             requestDispatcher.forward(request,response);
         } catch (ServletException e) {
             e.printStackTrace();
